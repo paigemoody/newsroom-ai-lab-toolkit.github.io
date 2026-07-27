@@ -12,7 +12,10 @@ h1, h2, h3, h4, h5, h6,
 
 /* Brand palette */
 :root {
+  /* Decorative fills only. White text on this measures 2.54:1 —
+     use --color-teal-deep when text sits on top. */
   --color-teal: #0db4ba;
+  --color-teal-deep: #098388; /* 4.55:1 with white text */
   --color-blue: #007fde;
   --color-orange: #ff8853;
   --color-light-grey: #e5e4e9;

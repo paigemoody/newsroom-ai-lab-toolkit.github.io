@@ -28,7 +28,7 @@
 
 .button {
   display: inline-block;
-  background-color: var(--color-teal);
+  background-color: var(--color-teal-deep);
   color: #fff !important;
   font-weight: 600;
   padding: 0.6rem 1.2rem;
