@@ -51,18 +51,21 @@ h1, h2, h3, h4, h5, h6,
 /* Problem statement highlighting - user/need/goal */
 .highlight-user {
   background-color: #fce8b2;
+  color: #1c1e21;
   padding: 1px 3px;
   border-radius: 2px;
 }
 
 .highlight-need {
   background-color: #c9daf8;
+  color: #1c1e21;
   padding: 1px 3px;
   border-radius: 2px;
 }
 
 .highlight-goal {
   background-color: #b6d7a8;
+  color: #1c1e21;
   padding: 1px 3px;
   border-radius: 2px;
 }
