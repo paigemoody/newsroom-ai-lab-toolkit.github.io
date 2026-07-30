@@ -33,12 +33,12 @@ function JourneyCard({ item }: { item: JourneyStep }) {
           {item.statement ? (
             <ProblemStatement {...item.statement} />
           ) : (
-            <p style={{ margin: 0, fontSize: '0.95rem', lineHeight: 1.7, color: '#374151' }}>{item.body}</p>
+            <p style={{ margin: 0, fontSize: '0.95rem', lineHeight: 1.7, color: 'var(--hh-text-primary)' }}>{item.body}</p>
           )}
         </div>
       )}
       {item.feedback && (
-        <div style={{ background: '#f9fafb', border: '1px solid #e5e4e9', borderRadius: '0.5rem', padding: '0.75rem 1rem', fontSize: '0.9rem', lineHeight: 1.6, color: '#374151' }}>
+        <div style={{ background: 'var(--hh-surface-secondary)', border: '1px solid var(--hh-border)', borderRadius: '0.5rem', padding: '0.75rem 1rem', fontSize: '0.9rem', lineHeight: 1.6, color: 'var(--hh-text-primary)' }}>
           <strong>💬 Feedback:</strong> <em>{item.feedback}</em>
         </div>
       )}
