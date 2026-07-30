@@ -4,53 +4,17 @@ on:
   pull_request:
     paths:
       - 'newsroom-ai-lab-toolkit-site/**'
-  workflow_dispatch:
 
 jobs:
-  update-snapshots:
-    name: Regenerate visual baselines (Ubuntu-rendered)
-    if: github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.ref_name }}
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-          cache-dependency-path: newsroom-ai-lab-toolkit-site/package-lock.json
-
-      - name: Install dependencies
-        working-directory: newsroom-ai-lab-toolkit-site
-        run: npm ci
-
-      - name: Install Playwright browsers
-        working-directory: newsroom-ai-lab-toolkit-site
-        run: npx playwright install --with-deps chromium
-
-      - name: Regenerate snapshots
-        working-directory: newsroom-ai-lab-toolkit-site
-        run: npx playwright test tests/visual --update-snapshots
-
-      - name: Commit updated baselines
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add newsroom-ai-lab-toolkit-site/tests/visual
-          if git diff --cached --quiet; then
-            echo "No snapshot changes to commit."
-          else
-            git commit -m "Regenerate visual regression baselines (Ubuntu-rendered)"
-            git push
-          fi
-
   playwright:
     name: Playwright visual regression
     runs-on: ubuntu-latest
+    # Run inside the same image the project's devcontainer uses (see
+    # .devcontainer/devcontainer.json) so screenshots are rendered with the same OS,
+    # fonts, and fontconfig as local development. Baselines are generated locally in
+    # this container; comparing against a different OS (e.g. bare ubuntu-latest) causes
+    # spurious diffs from font-rendering differences alone, not real regressions.
+    container: mcr.microsoft.com/devcontainers/javascript-node:4-24-trixie
     steps:
       - uses: actions/checkout@v4
 
