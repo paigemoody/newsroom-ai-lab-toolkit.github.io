@@ -27,6 +27,7 @@ export default function CarouselShell<T>({ items, renderCard }: CarouselShellPro
       </div>
       <div style={{ borderTop: '2px solid var(--hh-border)', padding: '0.75rem 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'var(--hh-surface-secondary)' }}>
         <button
+          type="button"
           className="carousel-shell-nav-btn"
           onClick={() => setIdx(i => Math.max(0, i - 1))}
           style={{ padding: '0.35rem 0.9rem', borderRadius: '0.375rem', border: '2px solid var(--hh-border)', background: 'var(--hh-surface-primary)', cursor: 'pointer', fontWeight: 600, fontSize: '0.9rem', visibility: idx === 0 ? 'hidden' : 'visible' }}
@@ -38,6 +39,7 @@ export default function CarouselShell<T>({ items, renderCard }: CarouselShellPro
           <div style={{ height: '100%', width: `${((idx + 1) / total) * 100}%`, background: 'var(--color-teal)', borderRadius: 3, transition: 'width 0.2s ease' }} />
         </div>
         <button
+          type="button"
           className="carousel-shell-nav-btn"
           onClick={() => setIdx(i => Math.min(total - 1, i + 1))}
           style={{ padding: '0.35rem 0.9rem', borderRadius: '0.375rem', border: '2px solid var(--color-teal)', background: 'var(--color-teal)', color: 'white', cursor: 'pointer', fontWeight: 600, fontSize: '0.9rem', visibility: idx === total - 1 ? 'hidden' : 'visible' }}
