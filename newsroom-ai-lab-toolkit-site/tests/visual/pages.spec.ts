@@ -11,7 +11,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('homepage - landing page, CTA banner, footer', async ({ page }) => {
-  await page.goto('/');
+  await page.goto('./');
   await expect(page.getByRole('heading', { level: 1 }).first()).toBeVisible();
   await expect(page).toHaveScreenshot('homepage.png', { fullPage: true });
 });

@@ -26,7 +26,7 @@ test('how-this-works - MethodologyBoard across steps', async ({ page }) => {
 
 test('mobile navbar menu open state', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/');
+  await page.goto('./');
   await page.getByRole('button', { name: 'Toggle navigation bar' }).click();
   await expect(page.locator('.navbar-sidebar')).toBeVisible();
   await expect(page).toHaveScreenshot('mobile-nav-open.png');
