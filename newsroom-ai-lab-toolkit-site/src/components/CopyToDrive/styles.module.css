@@ -1,5 +1,5 @@
 .card {
-  border: 2px solid var(--color-light-grey);
+  border: 2px solid var(--hh-border);
   border-radius: 8px;
   padding: 1.5rem;
   margin: 1.5rem 0;
@@ -28,6 +28,7 @@
 
 .button {
   display: inline-block;
+  /* --color-teal + #fff pairing not yet contrast-verified for dark mode - Phase 4 */
   background-color: var(--color-teal);
   color: #fff !important;
   font-weight: 600;

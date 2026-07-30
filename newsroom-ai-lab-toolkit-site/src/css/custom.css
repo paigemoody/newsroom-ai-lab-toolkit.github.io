@@ -9,12 +9,12 @@ h1, h2, h3, h4, h5, h6,
   font-family: 'Chakra Petch', sans-serif;
 }
 
-/* Legacy brand palette. --color-teal/--color-light-grey are still consumed directly
-   by a couple of components (migrated in a later pass); --color-blue/--color-orange
-   were defined but never used anywhere and have been removed. */
+/* Legacy brand palette. --color-teal is still consumed directly by CarouselShell and
+   CopyToDrive pending the brand-color-in-context review; --color-light-grey/--color-blue/--color-orange
+   were fully migrated to semantic tokens (or, for --color-blue/--color-orange, were never used) and
+   have been removed. */
 :root {
   --color-teal: #0db4ba;
-  --color-light-grey: #e5e4e9;
 }
 
 /*

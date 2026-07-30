@@ -11,7 +11,7 @@ function TitleBodyCard({ item }: { item: TitleBodyItem }) {
       <h3 style={{ marginTop: 0, marginBottom: '0.75rem', fontSize: '1.1rem' }}>{item.title}</h3>
       <div
         className="tip-body"
-        style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#374151' }}
+        style={{ fontSize: '0.95rem', lineHeight: 1.7, color: 'var(--hh-text-primary)' }}
         dangerouslySetInnerHTML={{ __html: mdInline(item.body) }}
       />
     </div>

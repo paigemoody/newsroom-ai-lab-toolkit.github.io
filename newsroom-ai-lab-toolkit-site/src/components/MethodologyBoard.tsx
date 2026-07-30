@@ -7,9 +7,13 @@ const CSS = `
   @media (min-width: 768px) { .mb-page { padding-left: 3rem; padding-right: 3rem; } }
   .mb-nav-btn { transition: opacity 0.15s, background 0.15s, border-color 0.15s, color 0.15s; }
   .mb-dot { transition: width 0.2s ease, background 0.2s ease; }
+  .mb-arc-travel-dot { animation: arc-travel 0.65s ease-in-out forwards; }
   @keyframes arc-travel {
     from { stroke-dashoffset: 0; }
     to   { stroke-dashoffset: -0.9; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mb-arc-travel-dot { animation: none; }
   }
 `;
 
@@ -69,11 +73,11 @@ function StepStructuredContent({ idx }: { idx: number }) {
 }
 
 const PHASE_SPANS = [
-  { label: 'Empathize', color: 'oklch(0.68 0.16 55)'  },
-  { label: 'Define',    color: 'oklch(0.55 0.18 240)' },
-  { label: 'Plan',      color: 'oklch(0.52 0.22 158)' },
-  { label: 'Prototype', color: 'oklch(0.46 0.22 165)' },
-  { label: 'Test',      color: 'oklch(0.40 0.18 172)' },
+  { label: 'Empathize' },
+  { label: 'Define' },
+  { label: 'Plan' },
+  { label: 'Prototype' },
+  { label: 'Test' },
 ];
 
 const DOT_BIG = 16;
@@ -117,9 +121,9 @@ function CombinedProgress({ steps, currentIdx, onStep, isLooping, triggerLoop }:
           {/* Traveling dot (right → left, curving upward) when looping */}
           {isLooping && (
             <path d="M 100 60 A 50 60 0 0 0 0 60" fill="none"
+              className="mb-arc-travel-dot"
               stroke={c.accent} strokeWidth="3"
-              pathLength="1" strokeDasharray="0.1 0.9" strokeLinecap="round"
-              style={{ animation:'arc-travel 0.65s ease-in-out forwards' }} />
+              pathLength="1" strokeDasharray="0.1 0.9" strokeLinecap="round" />
           )}
         </svg>
 
@@ -196,20 +200,20 @@ const STEP_CONTENTS: Array<() => React.ReactNode> = [
     <>
       <div style={{ background:c.surface, border:`1px solid ${c.border}`, borderRadius:'0.75rem', padding:'1.25rem' }}>
         <p style={{ ...Cp, fontSize:20, fontWeight:500, margin:'0 0 1rem', lineHeight:1.5 }}>
-          <span style={{ borderRadius:4, padding:'2px 6px', background:'#fef08a', color:c.ink }}>[User]</span>
+          <span style={{ borderRadius:4, padding:'2px 6px', background:'var(--hh-highlight-user-bg)', color:'var(--hh-highlight-user-text)' }}>[User]</span>
           {' '}<span style={{ color:c.textSec, fontStyle:'italic', fontWeight:400 }}>needs</span>{' '}
-          <span style={{ borderRadius:4, padding:'2px 6px', background:'#bfdbfe', color:c.ink }}>[need]</span>
+          <span style={{ borderRadius:4, padding:'2px 6px', background:'var(--hh-highlight-need-bg)', color:'var(--hh-highlight-need-text)' }}>[need]</span>
           {' '}<span style={{ color:c.textSec, fontStyle:'italic', fontWeight:400 }}>so that</span>{' '}
-          <span style={{ borderRadius:4, padding:'2px 6px', background:'#bbf7d0', color:c.ink }}>[goal]</span>.
+          <span style={{ borderRadius:4, padding:'2px 6px', background:'var(--hh-highlight-goal-bg)', color:'var(--hh-highlight-goal-text)' }}>[goal]</span>.
         </p>
         <div style={{ display:'flex', flexDirection:'column', gap:'0.5rem' }}>
           {[
-            { token:'User', bg:'#fef08a', label:'Who is affected?',    hint:'Reporter, editor, another specific role, a specific desk or team, the whole newsroom?' },
-            { token:'Need', bg:'#bfdbfe', label:'What do they need?',  hint:'What do they need to accomplish, avoid, or understand?' },
-            { token:'Goal', bg:'#bbf7d0', label:'Why does it matter?', hint:"What's the bigger outcome or value?" },
-          ].map(({ token, bg, label, hint }) => (
+            { token:'User', bg:'var(--hh-highlight-user-bg)', text:'var(--hh-highlight-user-text)', label:'Who is affected?',    hint:'Reporter, editor, another specific role, a specific desk or team, the whole newsroom?' },
+            { token:'Need', bg:'var(--hh-highlight-need-bg)', text:'var(--hh-highlight-need-text)', label:'What do they need?',  hint:'What do they need to accomplish, avoid, or understand?' },
+            { token:'Goal', bg:'var(--hh-highlight-goal-bg)', text:'var(--hh-highlight-goal-text)', label:'Why does it matter?', hint:"What's the bigger outcome or value?" },
+          ].map(({ token, bg, text, label, hint }) => (
             <p key={token} style={{ ...Fr, fontSize:14, color:c.text, lineHeight:1.5, margin:0 }}>
-              <span style={{ ...Gs, fontSize:13, fontWeight:600, borderRadius:4, padding:'2px 6px', marginRight:6, background:bg, color:c.ink }}>{token}</span>
+              <span style={{ ...Gs, fontSize:13, fontWeight:600, borderRadius:4, padding:'2px 6px', marginRight:6, background:bg, color:text }}>{token}</span>
               <span style={{ color:c.textSec, fontStyle:'italic', marginRight:4 }}>{label}</span>
               {hint}
             </p>
@@ -233,11 +237,11 @@ const STEP_CONTENTS: Array<() => React.ReactNode> = [
           <div key={i} style={{ display:'flex', alignItems:'flex-start', gap:'0.625rem', borderRadius:'0.5rem', padding:'0.75rem 0.875rem', background:c.surface, border:`1px solid ${c.accent}` }}>
             <div style={{ width:14, height:14, borderRadius:'50%', flexShrink:0, border:`2px solid ${c.accent}`, background:c.accent, marginTop:3 }} />
             <p style={{ ...Fr, fontSize:14, color:c.text, lineHeight:1.6, margin:0, flex:1 }}>
-              <span style={{ borderRadius:4, padding:'2px 6px', background:'#fef08a', color:c.ink }}>{s.user}</span>
+              <span style={{ borderRadius:4, padding:'2px 6px', background:'var(--hh-highlight-user-bg)', color:'var(--hh-highlight-user-text)' }}>{s.user}</span>
               {' '}need{' '}
-              <span style={{ borderRadius:4, padding:'2px 6px', background:'#bfdbfe', color:c.ink }}>{s.need}</span>
+              <span style={{ borderRadius:4, padding:'2px 6px', background:'var(--hh-highlight-need-bg)', color:'var(--hh-highlight-need-text)' }}>{s.need}</span>
               {' '}so that{' '}
-              <span style={{ borderRadius:4, padding:'2px 6px', background:'#bbf7d0', color:c.ink }}>{s.goal}</span>.
+              <span style={{ borderRadius:4, padding:'2px 6px', background:'var(--hh-highlight-goal-bg)', color:'var(--hh-highlight-goal-text)' }}>{s.goal}</span>.
             </p>
           </div>
         ))}
