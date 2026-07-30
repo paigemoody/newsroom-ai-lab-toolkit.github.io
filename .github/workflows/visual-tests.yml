@@ -9,6 +9,12 @@ jobs:
   playwright:
     name: Playwright visual regression
     runs-on: ubuntu-latest
+    # Run inside the same image the project's devcontainer uses (see
+    # .devcontainer/devcontainer.json) so screenshots are rendered with the same OS,
+    # fonts, and fontconfig as local development. Baselines are generated locally in
+    # this container; comparing against a different OS (e.g. bare ubuntu-latest) causes
+    # spurious diffs from font-rendering differences alone, not real regressions.
+    container: mcr.microsoft.com/devcontainers/javascript-node:4-24-trixie
     steps:
       - uses: actions/checkout@v4
 

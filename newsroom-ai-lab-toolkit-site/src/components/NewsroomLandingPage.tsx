@@ -65,46 +65,46 @@ export default function NewsroomLandingPage() {
 
         .landing-container { font-family: var(--font-ui); }
         .landing-container * { box-sizing: border-box; }
-        .section-dark a { color: color-mix(in oklch, var(--hh-accent) 80%, var(--hh-paper)); }
-        .section-dark a:hover { color: var(--hh-paper); }
+        .section-dark a { color: color-mix(in oklch, var(--hh-accent) 80%, var(--hh-bg-page)); }
+        .section-dark a:hover { color: var(--hh-bg-page); }
       `}</style>
 
-      <div className="landing-container" style={{ minHeight: '100vh', backgroundColor: 'var(--hh-paper)' }}>
+      <div className="landing-container" style={{ minHeight: '100vh', backgroundColor: 'var(--hh-bg-page)' }}>
 
         {/* Hero */}
-        <section style={{ backgroundColor: 'var(--hh-ink)', color: 'var(--hh-paper)', padding: '5rem 1.5rem 2.5rem' }}>
+        <section style={{ backgroundColor: 'var(--hh-text-strong)', color: 'var(--hh-bg-page)', padding: '5rem 1.5rem 2.5rem' }}>
           <div style={{ maxWidth: '64rem', margin: '0 auto' }}>
             <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '1.5rem', lineHeight: '1.2', fontFamily: 'var(--font-display)' }}>
               <MD>{hero.headline}</MD>
             </h1>
-            <p style={{ fontSize: '1.25rem', marginBottom: '2rem', lineHeight: '1.75', maxWidth: '48rem', fontFamily: 'var(--font-editorial)', color: 'color-mix(in oklch, var(--hh-paper) 90%, transparent)' }}>
+            <p style={{ fontSize: '1.25rem', marginBottom: '2rem', lineHeight: '1.75', maxWidth: '48rem', fontFamily: 'var(--font-editorial)', color: 'color-mix(in oklch, var(--hh-bg-page) 90%, transparent)' }}>
               <MD>{hero.subheading}</MD>
             </p>
           </div>
         </section>
 
         {/* Our Approach */}
-        <section style={{ padding: '2.5rem 1.5rem 2rem', backgroundColor: 'var(--hh-surface-subtle)' }}>
+        <section style={{ padding: '2.5rem 1.5rem 2rem', backgroundColor: 'var(--hh-surface-secondary)' }}>
           <div style={{ maxWidth: '64rem', margin: '0 auto' }}>
-            <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', marginBottom: '2rem', fontFamily: 'var(--font-display)', color: 'var(--hh-ink)' }}>
+            <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', marginBottom: '2rem', fontFamily: 'var(--font-display)', color: 'var(--hh-text-strong)' }}>
               <span style={{ color: 'var(--hh-accent)', fontWeight: '500' }}>/ </span>{approach.heading}
             </h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.25rem', fontFamily: 'var(--font-editorial)', fontSize: '1.125rem', lineHeight: '1.75', color: 'var(--hh-primary-text)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.25rem', fontFamily: 'var(--font-editorial)', fontSize: '1.125rem', lineHeight: '1.75', color: 'var(--hh-text-primary)' }}>
               {approach.paragraphs?.map((p: string, i: number) => (
                 <p key={i}><MD>{p}</MD></p>
               ))}
             </div>
             {approach.bold && (
-              <strong style={{ fontFamily: 'var(--font-display)', color: 'var(--hh-ink)', display: 'block', fontSize: '1.125rem', marginBottom: '0.75rem' }}><MD>{approach.bold}</MD></strong>
+              <strong style={{ fontFamily: 'var(--font-display)', color: 'var(--hh-text-strong)', display: 'block', fontSize: '1.125rem', marginBottom: '0.75rem' }}><MD>{approach.bold}</MD></strong>
             )}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '3rem', paddingTop: '1.5rem' }}>
               {approach.cards?.map((card: any, i: number) => (
                 <div key={card.title}>
-                  <p style={{ fontFamily: 'var(--font-display)', fontSize: '2.5rem', fontWeight: '300', lineHeight: 1, marginBottom: '1rem', color: 'var(--hh-ink)' }}>
+                  <p style={{ fontFamily: 'var(--font-display)', fontSize: '2.5rem', fontWeight: '300', lineHeight: 1, marginBottom: '1rem', color: 'var(--hh-text-strong)' }}>
                     {i + 1}/
                   </p>
-                  <h3 style={{ fontWeight: '700', fontSize: '1.125rem', marginBottom: '0.75rem', fontFamily: 'var(--font-display)', color: 'var(--hh-ink)' }}>{card.title}</h3>
-                  <p style={{ fontFamily: 'var(--font-editorial)', fontSize: '1rem', lineHeight: '1.7', color: 'var(--hh-secondary-text)', margin: 0 }}><MD>{card.body}</MD></p>
+                  <h3 style={{ fontWeight: '700', fontSize: '1.125rem', marginBottom: '0.75rem', fontFamily: 'var(--font-display)', color: 'var(--hh-text-strong)' }}>{card.title}</h3>
+                  <p style={{ fontFamily: 'var(--font-editorial)', fontSize: '1rem', lineHeight: '1.7', color: 'var(--hh-text-secondary)', margin: 0 }}><MD>{card.body}</MD></p>
                 </div>
               ))}
             </div>
@@ -112,22 +112,22 @@ export default function NewsroomLandingPage() {
         </section>
 
         {/* Credibility + Partners */}
-        <section style={{ backgroundColor: 'var(--hh-surface-subtle)', color: 'var(--hh-ink)', padding: '1.5rem 1.5rem 0' }}>
+        <section style={{ backgroundColor: 'var(--hh-surface-secondary)', color: 'var(--hh-text-strong)', padding: '1.5rem 1.5rem 0' }}>
           <div style={{ maxWidth: '64rem', margin: '0 auto', paddingBottom: '1rem' }}>
-            <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', marginBottom: '2rem', fontFamily: 'var(--font-display)', color: 'var(--hh-ink)' }}>
+            <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', marginBottom: '2rem', fontFamily: 'var(--font-display)', color: 'var(--hh-text-strong)' }}>
               <span style={{ color: 'var(--hh-accent)', fontWeight: '500' }}>/ </span>{credibility.heading}
             </h2>
-            <strong style={{ fontFamily: 'var(--font-display)', color: 'var(--hh-ink)', display: 'block', fontSize: '1.125rem', marginBottom: '0.75rem' }}><MD>{credibility.bold}</MD></strong>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', fontFamily: 'var(--font-editorial)', fontSize: '1.125rem', lineHeight: '1.75', color: 'var(--hh-primary-text)' }}>
+            <strong style={{ fontFamily: 'var(--font-display)', color: 'var(--hh-text-strong)', display: 'block', fontSize: '1.125rem', marginBottom: '0.75rem' }}><MD>{credibility.bold}</MD></strong>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', fontFamily: 'var(--font-editorial)', fontSize: '1.125rem', lineHeight: '1.75', color: 'var(--hh-text-primary)' }}>
               {credibility.paragraphs?.map((p: string, i: number) => (
                 <p key={i} style={{ margin: 0 }}><MD>{p}</MD></p>
               ))}
             </div>
           </div>
           {credibility.partners?.length > 0 && (
-            <div style={{ backgroundColor: 'var(--hh-ink)', paddingTop: '1.25rem', margin: '0 -1.5rem' }}>
+            <div style={{ backgroundColor: 'var(--hh-text-strong)', paddingTop: '1.25rem', margin: '0 -1.5rem' }}>
               <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '0 1.5rem' }}>
-                <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.75rem', fontWeight: '600', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'color-mix(in oklch, var(--hh-paper) 75%, transparent)', margin: 0 }}>
+                <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.75rem', fontWeight: '600', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'color-mix(in oklch, var(--hh-bg-page) 75%, transparent)', margin: 0 }}>
                   Partner newsrooms
                 </p>
               </div>
@@ -143,13 +143,13 @@ export default function NewsroomLandingPage() {
         </section>
 
         {/* Why It Works */}
-        <section style={{ padding: '4rem 1.5rem', backgroundColor: 'color-mix(in oklch, var(--hh-accent) 8%, var(--hh-paper))' }}>
+        <section style={{ padding: '4rem 1.5rem', backgroundColor: 'color-mix(in oklch, var(--hh-accent) 8%, var(--hh-bg-page))' }}>
           <div style={{ maxWidth: '64rem', margin: '0 auto' }}>
-            <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', marginBottom: '2rem', fontFamily: 'var(--font-display)', color: 'var(--hh-ink)' }}>
+            <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', marginBottom: '2rem', fontFamily: 'var(--font-display)', color: 'var(--hh-text-strong)' }}>
               <span style={{ color: 'var(--hh-accent)', fontWeight: '500' }}>/ </span>{why.heading}
             </h2>
             {why.intro && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '2rem', fontFamily: 'var(--font-editorial)', fontSize: '1.125rem', lineHeight: '1.75', color: 'var(--hh-primary-text)' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '2rem', fontFamily: 'var(--font-editorial)', fontSize: '1.125rem', lineHeight: '1.75', color: 'var(--hh-text-primary)' }}>
                 {why.intro.map((p: string, i: number) => (
                   <p key={i}><MD>{p}</MD></p>
                 ))}
@@ -159,7 +159,7 @@ export default function NewsroomLandingPage() {
               {why.items?.map((item: any, i: number) => (
                 <div key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
                   <CheckCircle2 size={24} style={{ color: 'var(--hh-accent)', flexShrink: 0, marginTop: '0.25rem' }} />
-                  <p style={{ fontSize: '1.125rem', fontFamily: 'var(--font-editorial)', color: 'var(--hh-primary-text)' }}>
+                  <p style={{ fontSize: '1.125rem', fontFamily: 'var(--font-editorial)', color: 'var(--hh-text-primary)' }}>
                     <strong style={{ fontFamily: 'var(--font-display)' }}><MD>{item.title}</MD></strong>{' '}<MD>{item.description}</MD>
                   </p>
                 </div>
@@ -168,7 +168,7 @@ export default function NewsroomLandingPage() {
             <div style={{ marginTop: '3rem' }}>
               <Link
                 to="/docs/how-this-works"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.625rem', backgroundColor: 'var(--hh-accent)', color: 'var(--hh-paper)', fontFamily: 'var(--font-display)', fontWeight: '600', fontSize: '1.25rem', padding: '1rem 2.25rem', borderRadius: '0.375rem', textDecoration: 'none' }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.625rem', backgroundColor: 'var(--hh-accent)', color: 'var(--hh-bg-page)', fontFamily: 'var(--font-display)', fontWeight: '600', fontSize: '1.25rem', padding: '1rem 2.25rem', borderRadius: '0.375rem', textDecoration: 'none' }}
                 onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.85'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}
               >

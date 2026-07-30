@@ -17,12 +17,12 @@ const Cp: React.CSSProperties = { fontFamily: "'Chakra Petch', sans-serif" };
 const Fr: React.CSSProperties = { fontFamily: "'Fraunces', serif" };
 const Gs: React.CSSProperties = { fontFamily: "'Geist', sans-serif" };
 const c = {
-  paper:        'var(--hh-paper)',
-  ink:          'var(--hh-ink)',
-  text:         'var(--hh-primary-text)',
-  textSec:      'var(--hh-secondary-text)',
+  paper:        'var(--hh-bg-page)',
+  ink:          'var(--hh-text-strong)',
+  text:         'var(--hh-text-primary)',
+  textSec:      'var(--hh-text-secondary)',
   border:       'var(--hh-border)',
-  surface:      'var(--hh-surface-subtle)',
+  surface:      'var(--hh-surface-secondary)',
   accent:       'var(--hh-accent)',
   accentSubtle: 'var(--hh-accent-subtle)',
 };
@@ -476,7 +476,7 @@ const STEPS = [
 function PartsGrid({ activePart, completed, includeActive }: { activePart: number; completed: number[]; includeActive?: boolean }) {
   const parts = ['Part 1', 'Part 2', 'Part 3'];
   const green = c.accent;
-  const greenBg = 'color-mix(in oklch, var(--hh-accent) 12%, var(--hh-paper))';
+  const greenBg = 'color-mix(in oklch, var(--hh-accent) 12%, var(--hh-bg-page))';
   const greenBar = 'color-mix(in oklch, var(--hh-accent) 30%, white)';
   const completedSet = new Set(completed);
   return (
