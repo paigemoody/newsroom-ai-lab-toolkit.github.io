@@ -2,7 +2,7 @@ import React from 'react';
 
 const bannerStyle: React.CSSProperties = {
   background: 'var(--hh-accent)',
-  color: 'var(--hh-paper)',
+  color: 'var(--hh-bg-page)',
   padding: '0.75rem 1.5rem',
   textAlign: 'center',
   fontFamily: 'var(--font-display)',

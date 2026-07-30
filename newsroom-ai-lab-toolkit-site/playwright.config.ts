@@ -32,8 +32,11 @@ export default defineConfig({
     toHaveScreenshot: {
       // Freezes CSS animations/transitions to a completed state and hides carets so
       // MethodologyBoard's arc-travel keyframe and carousel transitions don't flake.
+      // No aggregate diff tolerance (maxDiffPixelRatio/maxDiffPixels) - pages are fully
+      // static and deterministic, so any real content/style change should be reviewed
+      // rather than silently tolerated. Playwright's default per-pixel perceptual
+      // threshold (0.2) already absorbs anti-aliasing/font-hinting jitter.
       animations: 'disabled',
-      maxDiffPixelRatio: 0.01,
     },
   },
 

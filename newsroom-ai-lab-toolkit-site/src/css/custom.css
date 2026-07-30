@@ -4,34 +4,95 @@
  * work well for content-centric websites.
  */
 
-
 h1, h2, h3, h4, h5, h6,
 .navbar {
   font-family: 'Chakra Petch', sans-serif;
 }
 
-/* Brand palette */
+/* Legacy brand palette. --color-teal/--color-light-grey are still consumed directly
+   by a couple of components (migrated in a later pass); --color-blue/--color-orange
+   were defined but never used anywhere and have been removed. */
 :root {
   --color-teal: #0db4ba;
-  --color-blue: #007fde;
-  --color-orange: #ff8853;
   --color-light-grey: #e5e4e9;
 }
 
-/* Hacks/Hackers brand palette - single source of truth for the landing page,
-   site footer, CTA banner, methodology board, and problem statement formula. */
+/*
+ * Hacks/Hackers semantic design tokens - single source of truth for the landing page,
+ * site footer, CTA banner, methodology board, problem-statement formula, and carousels.
+ *
+ * Tokens describe *how* a color is used, not what it looks like. Each is defined once
+ * here for light mode and overridden under [data-theme='dark'] below with an
+ * intentionally-designed dark value (not a mechanical inversion). Every text/background
+ * pairing has been checked against WCAG 2.2 AA (4.5:1 normal text, 3:1 large text /
+ * meaningful non-text UI) in both themes.
+ */
 :root {
-  --hh-paper: oklch(0.99 0.01 0);
-  --hh-ink: oklch(0.18 0.01 180);
-  --hh-primary-text: oklch(0.30 0.01 180);
-  --hh-secondary-text: oklch(0.48 0.01 180);
+  /* Surfaces */
+  --hh-bg-page: oklch(0.99 0.01 0);
+  --hh-surface-primary: oklch(0.99 0.01 0);
+  --hh-surface-secondary: oklch(0.96 0.006 90);
+  --hh-surface-elevated: oklch(0.94 0.006 90);
+
+  /* Text */
+  --hh-text-strong: oklch(0.18 0.01 180);
+  --hh-text-primary: oklch(0.30 0.01 180);
+  --hh-text-secondary: oklch(0.48 0.01 180);
+  --hh-text-muted: oklch(0.53 0.01 180);
+  --hh-text-on-accent: oklch(0.99 0.01 0);
+  /* Fixed - identical in both themes. Used only on the permanently-dark footer band. */
+  --hh-text-inverse: oklch(0.97 0.006 90);
+
+  /* Borders */
   --hh-border: oklch(0.92 0.008 90);
-  --hh-surface-subtle: oklch(0.96 0.006 90);
+  /* For borders that carry meaning (buttons, inputs, focus) - needs >=3:1 vs its surface. */
+  --hh-border-strong: oklch(0.55 0.01 90);
+
+  /* Accent / brand */
   --hh-accent: rgb(11, 118, 23);
-  --hh-accent-subtle: color-mix(in oklch, var(--hh-accent) 10%, var(--hh-paper));
+  --hh-accent-subtle: color-mix(in oklch, var(--hh-accent) 10%, var(--hh-bg-page));
+  /* Same hue as --hh-accent, verified to pass 4.5:1 as small inline text/links. */
+  --hh-accent-text: rgb(11, 118, 23);
+
+  /* Links */
+  --hh-link: var(--hh-accent);
+  --hh-link-hover: color-mix(in oklch, var(--hh-accent) 85%, black);
+  --hh-link-visited: color-mix(in oklch, var(--hh-accent) 55%, var(--hh-text-secondary));
+
+  /* Focus */
+  --hh-focus-ring: var(--hh-accent);
+
+  /* Status */
+  --hh-success: var(--hh-accent);
+  --hh-warning: oklch(0.52 0.15 75);
+  --hh-error: oklch(0.5 0.19 25);
+
+  /* Selection */
+  --hh-selection-bg: color-mix(in oklch, var(--hh-accent) 25%, var(--hh-bg-page));
+  --hh-selection-text: var(--hh-text-strong);
+
+  /* Shadow */
+  --hh-shadow-sm: rgba(0, 0, 0, 0.06);
+  --hh-shadow-md: rgba(0, 0, 0, 0.12);
+
+  /* Problem-statement highlight categories (user/need/goal). Backgrounds + text are
+     pinned per-theme independently of the text tokens above - see [data-theme='dark']. */
+  --hh-highlight-user-bg: #fce8b2;
+  --hh-highlight-user-text: oklch(0.19 0.01 180);
+  --hh-highlight-need-bg: #c9daf8;
+  --hh-highlight-need-text: oklch(0.19 0.01 180);
+  --hh-highlight-goal-bg: #b6d7a8;
+  --hh-highlight-goal-text: oklch(0.19 0.01 180);
+
+  /* Fixed - identical in both themes. The footer/CTA band is intentionally always dark. */
+  --hh-footer-bg: oklch(0.18 0.01 180);
+
+  /* Fonts */
   --font-display: 'Chakra Petch', sans-serif;
   --font-editorial: 'Fraunces', serif;
   --font-ui: 'Geist', sans-serif;
+
+  color-scheme: light;
 }
 
 /* You can override the default Infima variables here. */
@@ -45,24 +106,37 @@ h1, h2, h3, h4, h5, h6,
   --ifm-color-primary-lightest: #565365;
   --ifm-font-family-base: var(--font-ui);
   --ifm-code-font-size: 95%;
+  --ifm-background-color: var(--hh-bg-page);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
-/* Problem statement highlighting - user/need/goal */
+::selection {
+  background: var(--hh-selection-bg);
+  color: var(--hh-selection-text);
+}
+
+/* Problem statement highlighting - user/need/goal. Border-bottom style is a
+   non-color cue distinguishing the three categories for users who can't rely on hue. */
 .highlight-user {
-  background-color: #fce8b2;
+  background-color: var(--hh-highlight-user-bg);
+  color: var(--hh-highlight-user-text);
+  border-bottom: 2px solid var(--hh-highlight-user-text);
   padding: 1px 3px;
   border-radius: 2px;
 }
 
 .highlight-need {
-  background-color: #c9daf8;
+  background-color: var(--hh-highlight-need-bg);
+  color: var(--hh-highlight-need-text);
+  border-bottom: 2px dashed var(--hh-highlight-need-text);
   padding: 1px 3px;
   border-radius: 2px;
 }
 
 .highlight-goal {
-  background-color: #b6d7a8;
+  background-color: var(--hh-highlight-goal-bg);
+  color: var(--hh-highlight-goal-text);
+  border-bottom: 2px dotted var(--hh-highlight-goal-text);
   padding: 1px 3px;
   border-radius: 2px;
 }
@@ -84,14 +158,62 @@ h1, h2, h3, h4, h5, h6,
   margin: 0.25rem 0;
 }
 
-.footer {
-  --ifm-footer-link-color: #c8c7ce;
-  --ifm-footer-link-hover-color: var(--color-teal);
-  --ifm-footer-title-color: #ffffff;
-}
-
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
+  /* Surfaces */
+  --hh-bg-page: oklch(0.17 0.014 180);
+  --hh-surface-primary: oklch(0.22 0.014 180);
+  --hh-surface-secondary: oklch(0.26 0.012 90);
+  --hh-surface-elevated: oklch(0.31 0.012 90);
+
+  /* Text */
+  --hh-text-strong: oklch(0.97 0.006 180);
+  --hh-text-primary: oklch(0.88 0.006 180);
+  --hh-text-secondary: oklch(0.74 0.006 180);
+  --hh-text-muted: oklch(0.62 0.006 180);
+  --hh-text-on-accent: oklch(0.09 0.01 180);
+  --hh-text-inverse: oklch(0.97 0.006 90);
+
+  /* Borders */
+  --hh-border: oklch(0.4 0.012 90);
+  --hh-border-strong: oklch(0.56 0.012 90);
+
+  /* Accent / brand - brighter green than light mode, tuned separately for fill use
+     (paired with --hh-text-on-accent) vs standalone text use (--hh-accent-text). */
+  --hh-accent: oklch(0.6 0.15 150);
+  --hh-accent-subtle: color-mix(in oklch, var(--hh-accent) 10%, var(--hh-bg-page));
+  --hh-accent-text: oklch(0.78 0.16 150);
+
+  /* Links - use the brighter --hh-accent-text so inline links read clearly on the page. */
+  --hh-link: var(--hh-accent-text);
+  --hh-link-hover: color-mix(in oklch, var(--hh-accent-text) 85%, white);
+  --hh-link-visited: color-mix(in oklch, var(--hh-accent-text) 55%, var(--hh-text-secondary));
+
+  /* Focus */
+  --hh-focus-ring: var(--hh-accent-text);
+
+  /* Status */
+  --hh-success: var(--hh-accent-text);
+  --hh-warning: oklch(0.78 0.15 75);
+  --hh-error: oklch(0.68 0.19 25);
+
+  /* Selection */
+  --hh-selection-bg: color-mix(in oklch, var(--hh-accent-text) 25%, var(--hh-bg-page));
+  --hh-selection-text: var(--hh-text-strong);
+
+  /* Shadow - dark surfaces need deeper/more opaque shadows to read at all. */
+  --hh-shadow-sm: rgba(0, 0, 0, 0.4);
+  --hh-shadow-md: rgba(0, 0, 0, 0.6);
+
+  /* Highlight categories - deliberately redesigned for a dark canvas, not inverted:
+     darkened saturated tint + light pinned text, independent of --hh-text-*. */
+  --hh-highlight-user-bg: oklch(0.4 0.1 85);
+  --hh-highlight-user-text: oklch(0.95 0.02 85);
+  --hh-highlight-need-bg: oklch(0.4 0.1 250);
+  --hh-highlight-need-text: oklch(0.95 0.02 250);
+  --hh-highlight-goal-bg: oklch(0.4 0.1 145);
+  --hh-highlight-goal-text: oklch(0.95 0.02 145);
+
   --ifm-color-primary: #40ecf2;
   --ifm-color-primary-dark: #32eaf1;
   --ifm-color-primary-darker: #24e9f0;
@@ -100,4 +222,6 @@ h1, h2, h3, h4, h5, h6,
   --ifm-color-primary-lighter: #5deff4;
   --ifm-color-primary-lightest: #79f2f6;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+
+  color-scheme: dark;
 }
