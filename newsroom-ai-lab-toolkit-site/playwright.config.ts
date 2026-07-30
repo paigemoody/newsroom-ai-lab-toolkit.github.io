@@ -5,15 +5,16 @@ const BASE_PATH = '/newsroom-ai-lab-toolkit.github.io/';
 const BASE_URL = `http://localhost:${PORT}${BASE_PATH}`;
 
 /**
- * Visual-regression + accessibility harness for the Playbook site.
+ * Visual-regression harness for the Playbook site.
  *
  * Runs against a production build (`docusaurus build` + `docusaurus serve`), per the
  * ticket's requirement to test the real production output rather than the dev server.
  *
  * Only a light-mode desktop project exists today (Phase 0 of the dark-mode rollout).
- * Dark-mode and mobile-viewport projects are added in Phase 9 once dark theming
- * actually exists end-to-end - adding them is a config-only change, since specs are
- * written against page paths/components, not against a specific theme.
+ * Dark-mode and mobile-viewport projects, plus `@axe-core/playwright` accessibility
+ * specs, are added in Phase 9 once dark theming actually exists end-to-end - adding
+ * the projects is a config-only change, since specs are written against page
+ * paths/components, not against a specific theme.
  */
 export default defineConfig({
   testDir: './tests',

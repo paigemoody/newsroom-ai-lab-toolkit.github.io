@@ -1,4 +1,4 @@
-name: Visual & Accessibility Tests
+name: Visual Regression Tests
 
 on:
   pull_request:

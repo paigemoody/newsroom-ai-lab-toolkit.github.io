@@ -7,9 +7,12 @@ pagination_next: null
 
 # QA: Code sample
 
-This page exists only for automated visual-regression and accessibility testing of
-Prism code blocks (inline code, fenced code, and line highlighting) in both light and
-dark themes. It is not linked from the sidebar or search.
+This page exists only for automated testing of Prism code blocks (inline code, fenced
+code, and line highlighting). It is not linked from the sidebar or search.
+
+Currently used by the light-mode visual-regression suite. Dark-theme and accessibility
+(`@axe-core/playwright`) coverage of this page are planned once dark-mode theming
+lands - see the project's dark-mode tracking plan.
 
 Inline code: `const example = true;`
 
