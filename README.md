@@ -56,11 +56,30 @@ npm run test:visual:update
 
 CI runs this suite on every pull request via `.github/workflows/visual-tests.yml`.
 
-Only a light-mode desktop project (`light-desktop`) is configured in `playwright.config.ts` today. Dark-mode and mobile-viewport projects, plus `@axe-core/playwright` accessibility scans, are planned once dark-mode theming is complete — adding those is config-only, since specs target page paths/components rather than a specific theme.
+Only a light-mode desktop project (`light-desktop`) is configured in `playwright.config.ts` currently.
 
 ### Adding a visual spec
 
-1. Add a `test(...)` to an existing file in `tests/visual/`, or create a new `*.spec.ts` there.
-2. Navigate to the page/state, and assert something meaningful is visible (e.g. a heading) before snapshotting.
-3. If the page has CSS animations, call `page.emulateMedia({ reducedMotion: 'reduce' })` in `test.beforeEach` to keep snapshots deterministic.
-4. Run `npm run test:visual:update`, review the generated image, commit it.
+A "spec" is just a test file: a small script that opens a page in a real (headless) browser, checks it loaded correctly, then takes a screenshot and compares it pixel-by-pixel against a saved "baseline" image. If a change accidentally moves something or breaks a color, the screenshot won't match and the test fails — that's the whole mechanism.
+
+The easiest way to add one is to copy an existing test and adapt it. Minimal example, based on `tests/visual/pages.spec.ts`:
+
+```ts
+test('doc page - my new page', async ({ page }) => {
+  await page.goto('docs/my-new-page');
+  await expect(page.getByRole('heading', { name: 'My New Page' })).toBeVisible();
+  await expect(page).toHaveScreenshot('my-new-page.png', { fullPage: true });
+});
+```
+
+Step by step:
+
+1. **Add the test.** Put a `test(...)` block like the one above into an existing file in `tests/visual/`, or create a new file there ending in `.spec.ts` — Playwright picks those up automatically.
+2. **Navigate and assert.** `page.goto(...)` opens the page (paths are relative to the site — no need to write out `http://localhost:3000/...`). The `expect(...).toBeVisible()` line isn't strictly required, but it's good practice: it fails with a clear "heading not found" error if the page is broken, instead of only showing a confusing screenshot diff that's harder to debug.
+3. **Handle animations, if the page has any.** If something moves/fades/transitions on its own (e.g. MethodologyBoard's arc animation), add `await page.emulateMedia({ reducedMotion: 'reduce' })` inside a `test.beforeEach` at the top of the file (see the existing specs for an example). Without this, the screenshot might get taken mid-animation and come out slightly different every run — a "flaky" test that fails randomly for no real reason.
+4. **Generate the baseline image.** Run:
+   ```bash
+   npm run test:visual:update
+   ```
+   This is the only way to create the first screenshot for a brand-new test — there's nothing to compare against yet, so Playwright just saves whatever it sees as the new baseline.
+5. **Review and commit.** Open the generated `.png` in `tests/visual/*-snapshots/` and actually look at it — a test can "pass" while showing a broken page, if that broken page is what got saved as the baseline. Commit the image alongside your code change; it's what future test runs will compare against.
