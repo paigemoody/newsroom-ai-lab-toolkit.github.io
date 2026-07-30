@@ -9,6 +9,14 @@ h1, h2, h3, h4, h5, h6,
   font-family: 'Chakra Petch', sans-serif;
 }
 
+/* hackshackers_logomark.png is a solid dark mark with no dark-mode variant - it's
+   nearly invisible against the dark navbar. Invert Docusaurus's own dark-theme
+   ThemedImage instance (same technique as the McGovern sponsor logo in SiteFooter.tsx)
+   rather than shipping a second asset. */
+.navbar__logo img[class*='themedComponent--dark'] {
+  filter: brightness(0) invert(1);
+}
+
 /* Legacy brand palette. --color-teal is still consumed directly by CarouselShell and
    CopyToDrive pending the brand-color-in-context review; --color-light-grey/--color-blue/--color-orange
    were fully migrated to semantic tokens (or, for --color-blue/--color-orange, were never used) and
@@ -84,8 +92,10 @@ h1, h2, h3, h4, h5, h6,
   --hh-highlight-goal-bg: #b6d7a8;
   --hh-highlight-goal-text: oklch(0.19 0.01 180);
 
-  /* Fixed - identical in both themes. The footer/CTA band is intentionally always dark. */
-  --hh-footer-bg: oklch(0.18 0.01 180);
+  /* Fixed - identical in both themes. Pairs with --hh-text-inverse. Used for the
+     handful of decorative bands that are intentionally always dark regardless of site
+     theme: the footer, the landing page hero, and the partner-logo strip. */
+  --hh-inverse-surface: oklch(0.18 0.01 180);
 
   /* Fonts */
   --font-display: 'Chakra Petch', sans-serif;

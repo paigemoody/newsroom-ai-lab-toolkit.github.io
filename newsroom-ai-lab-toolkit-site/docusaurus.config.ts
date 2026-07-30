@@ -121,7 +121,6 @@ const config: Config = {
     image: 'img/docusaurus-social-card.jpg',
     colorMode: {
       respectPrefersColorScheme: true,
-      disableSwitch: true,
     },
     navbar: {
       title: '[BETA] Newsroom AI Lab Playbook',
