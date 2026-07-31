@@ -34,7 +34,7 @@ test('doc page - problem statement examples / ProblemStatementCarousel + TaskRes
   await expect(page).toHaveScreenshot('doc-problem-statement-examples.png', { fullPage: true });
 });
 
-test('doc page - QA code sample / Prism code blocks', async ({ page }) => {
+test('page - QA code sample / Prism code blocks', async ({ page }) => {
   await page.goto('qa-code-sample');
   await expect(page.getByRole('heading', { name: 'QA: Code sample' })).toBeVisible();
   await expect(page).toHaveScreenshot('doc-code-sample.png', { fullPage: true });
