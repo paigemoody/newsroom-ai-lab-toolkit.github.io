@@ -28,8 +28,9 @@
 
 /* Accent is a 10%-rule brand color, not a default button fill - ink by default,
    accent only on hover/focus (brand design system usage discipline). Note: this class
-   is currently unused - CopyToDrive/index.tsx only exports the inline SVG icon and never
-   imports this module - kept correct in case it's wired up in the future. */
+   is currently unused - CopyToDrive/index.tsx imports this module but never references
+   any of its class names (only renders the inline SVG icon) - kept correct in case it's
+   wired up in the future. */
 .button {
   display: inline-block;
   background-color: var(--hh-text-strong);

@@ -53,7 +53,7 @@ export default function CarouselShell<T>({ items, renderCard }: CarouselShellPro
           type="button"
           className="carousel-shell-nav-btn carousel-shell-next-btn"
           onClick={() => setIdx(i => Math.min(total - 1, i + 1))}
-          style={{ padding: '0.35rem 0.9rem', borderRadius: '0.375rem', border: '2px solid', cursor: 'pointer', fontWeight: 600, fontSize: '0.9rem', visibility: idx === total - 1 ? 'hidden' : 'visible' }}
+          style={{ padding: '0.35rem 0.9rem', borderRadius: '0.375rem', borderWidth: '2px', borderStyle: 'solid', cursor: 'pointer', fontWeight: 600, fontSize: '0.9rem', visibility: idx === total - 1 ? 'hidden' : 'visible' }}
         >
           Next →
         </button>

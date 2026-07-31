@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './styles.module.css';
 
 const FOLDER_URL = 'https://drive.google.com/drive/folders/1sZv1w_4aBRFd8lpIezhDLmNnc5UWCfmr';
 

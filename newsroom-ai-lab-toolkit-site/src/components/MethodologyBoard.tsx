@@ -573,7 +573,7 @@ export default function MethodologyBoard() {
         style={{ ...Gs, padding:'0.375rem 0.875rem', borderRadius:'0.375rem', border:`2px solid ${c.border}`, background:c.paper, cursor: idx === 0 ? 'default' : 'pointer', fontWeight:600, fontSize:'0.85rem', color:c.ink, opacity: idx === 0 ? 0 : 1, transition:'opacity 0.15s' }}
       >←</button>
       <button type="button" className="mb-next-btn" onClick={handleNext}
-        style={{ ...Gs, padding:'0.375rem 0.875rem', borderRadius:'0.375rem', border:'2px solid', cursor:'pointer', fontWeight:600, fontSize:'0.85rem' }}
+        style={{ ...Gs, padding:'0.375rem 0.875rem', borderRadius:'0.375rem', borderWidth:'2px', borderStyle:'solid', cursor:'pointer', fontWeight:600, fontSize:'0.85rem' }}
       >→</button>
     </div>
   );
