@@ -4,6 +4,10 @@
  * work well for content-centric websites.
  */
 
+/* Chakra Petch is the display font for genuine headings (article H1, in-content H2/H3) -
+   NOT for card-list titles, which the brand design system keeps in the UI sans (Geist) for
+   scanning vs. reading. Carousel card titles (BenefitsCarousel, IterationJourneyCarousel,
+   TitleBodyCarousel) override this per-component via an inline fontFamily. */
 h1, h2, h3, h4, h5, h6,
 .navbar {
   font-family: 'Chakra Petch', sans-serif;
@@ -17,13 +21,6 @@ h1, h2, h3, h4, h5, h6,
   filter: brightness(0) invert(1);
 }
 
-/* Legacy brand palette. --color-teal is still consumed directly by CarouselShell and
-   CopyToDrive pending the brand-color-in-context review; --color-light-grey/--color-blue/--color-orange
-   were fully migrated to semantic tokens (or, for --color-blue/--color-orange, were never used) and
-   have been removed. */
-:root {
-  --color-teal: #0db4ba;
-}
 
 /*
  * Hacks/Hackers semantic design tokens - single source of truth for the landing page,
@@ -36,18 +33,21 @@ h1, h2, h3, h4, h5, h6,
  * meaningful non-text UI) in both themes.
  */
 :root {
-  /* Surfaces */
-  --hh-bg-page: oklch(0.99 0.01 0);
-  --hh-surface-primary: oklch(0.99 0.01 0);
+  /* Surfaces. Values match the Hacks/Hackers Professional-register visual design
+     system's "Paper" token exactly (oklch(0.99 0.005 90)). */
+  --hh-bg-page: oklch(0.99 0.005 90);
+  --hh-surface-primary: oklch(0.99 0.005 90);
   --hh-surface-secondary: oklch(0.96 0.006 90);
   --hh-surface-elevated: oklch(0.94 0.006 90);
 
-  /* Text */
+  /* Text. Strong/primary/secondary match the design system's Ink/Primary text/Secondary
+     text tokens exactly. */
   --hh-text-strong: oklch(0.18 0.01 180);
   --hh-text-primary: oklch(0.30 0.01 180);
   --hh-text-secondary: oklch(0.48 0.01 180);
   --hh-text-muted: oklch(0.53 0.01 180);
-  --hh-text-on-accent: oklch(0.99 0.01 0);
+  /* Pairs with --hh-accent as a fill (verified 4.5:1+ - see --hh-accent below). */
+  --hh-text-on-accent: oklch(0.99 0.005 90);
   /* Fixed - identical in both themes. Used only on the permanently-dark footer band. */
   --hh-text-inverse: oklch(0.97 0.006 90);
 
@@ -56,11 +56,15 @@ h1, h2, h3, h4, h5, h6,
   /* For borders that carry meaning (buttons, inputs, focus) - needs >=3:1 vs its surface. */
   --hh-border-strong: oklch(0.55 0.01 90);
 
-  /* Accent / brand */
-  --hh-accent: rgb(11, 118, 23);
+  /* Accent / brand. oklch(0.50 0.24 158) is the design system's exact Professional-register
+     accent (#008620) - the desaturated, lower-lightness bridge to the Hacker register's
+     terminal green. Per the system's usage discipline, this is a 10%-rule color: it must
+     not appear as a default CTA fill (see button components), only on link text, hover,
+     focus, and confirmation states. A second brand accent (teal, amber, etc.) is explicitly
+     forbidden in this register - it belongs to the Hacker register only. */
+  --hh-accent: oklch(0.5 0.24 158);
   --hh-accent-subtle: color-mix(in oklch, var(--hh-accent) 10%, var(--hh-bg-page));
-  /* Same hue as --hh-accent, verified to pass 4.5:1 as small inline text/links. */
-  --hh-accent-text: rgb(11, 118, 23);
+  --hh-accent-text: oklch(0.5 0.24 158);
 
   /* Links */
   --hh-link: var(--hh-accent);
@@ -94,8 +98,12 @@ h1, h2, h3, h4, h5, h6,
 
   /* Fixed - identical in both themes. Pairs with --hh-text-inverse. Used for the
      handful of decorative bands that are intentionally always dark regardless of site
-     theme: the footer, the landing page hero, and the partner-logo strip. */
+     theme: the CTA banner, the footer, the landing page hero, and the partner-logo strip. */
   --hh-inverse-surface: oklch(0.18 0.01 180);
+  /* Fixed - identical in both themes. The light-mode --hh-accent (tuned against the light
+     paper background) only hits 3.95:1 against --hh-inverse-surface, so links on the
+     fixed-dark band need this dedicated always-bright accent instead of var(--hh-accent). */
+  --hh-accent-inverse: oklch(0.68 0.19 158);
 
   /* Fonts */
   --font-display: 'Chakra Petch', sans-serif;
@@ -105,15 +113,21 @@ h1, h2, h3, h4, h5, h6,
   color-scheme: light;
 }
 
-/* You can override the default Infima variables here. */
+/* You can override the default Infima variables here.
+   Infima's "primary" family (sidebar active state, breadcrumbs, pagination, doc-prose
+   links) previously used an unrelated purple-grey/cyan palette in neither theme actually
+   matched the brand design system - the dark value (#40ecf2) in particular read as a
+   second, teal-adjacent accent, which the system explicitly reserves for the Hacker
+   register only. The Professional register has exactly one accent; derive Infima's whole
+   tint/shade scale from --hh-accent instead of a second, unrelated color family. */
 :root {
-  --ifm-color-primary: #3c3946;
-  --ifm-color-primary-dark: #35323e;
-  --ifm-color-primary-darker: #2e2c35;
-  --ifm-color-primary-darkest: #24222a;
-  --ifm-color-primary-light: #43404f;
-  --ifm-color-primary-lighter: #484554;
-  --ifm-color-primary-lightest: #565365;
+  --ifm-color-primary: var(--hh-accent);
+  --ifm-color-primary-dark: color-mix(in oklch, var(--hh-accent) 90%, black);
+  --ifm-color-primary-darker: color-mix(in oklch, var(--hh-accent) 80%, black);
+  --ifm-color-primary-darkest: color-mix(in oklch, var(--hh-accent) 60%, black);
+  --ifm-color-primary-light: color-mix(in oklch, var(--hh-accent) 90%, white);
+  --ifm-color-primary-lighter: color-mix(in oklch, var(--hh-accent) 80%, white);
+  --ifm-color-primary-lightest: color-mix(in oklch, var(--hh-accent) 60%, white);
   --ifm-font-family-base: var(--font-ui);
   --ifm-code-font-size: 95%;
   --ifm-background-color: var(--hh-bg-page);
@@ -168,11 +182,18 @@ h1, h2, h3, h4, h5, h6,
   margin: 0.25rem 0;
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/*
+ * Dark values for the Professional register. The brand design system only specifies a
+ * light palette - these are derived following its own stated method (tinted neutrals via
+ * color-mix from ink/paper, never a hand-picked gray; same accent hue lifted in lightness
+ * for dark-surface contrast) rather than a mechanical inversion, and independently
+ * contrast-verified against WCAG 2.2 AA. Surface/border hues stay in the 90 family and
+ * text hues stay in the 180 family, matching the light palette's own convention.
+ */
 [data-theme='dark'] {
   /* Surfaces */
-  --hh-bg-page: oklch(0.17 0.014 180);
-  --hh-surface-primary: oklch(0.22 0.014 180);
+  --hh-bg-page: oklch(0.17 0.014 90);
+  --hh-surface-primary: oklch(0.22 0.014 90);
   --hh-surface-secondary: oklch(0.26 0.012 90);
   --hh-surface-elevated: oklch(0.31 0.012 90);
 
@@ -181,6 +202,7 @@ h1, h2, h3, h4, h5, h6,
   --hh-text-primary: oklch(0.88 0.006 180);
   --hh-text-secondary: oklch(0.74 0.006 180);
   --hh-text-muted: oklch(0.62 0.006 180);
+  /* Pairs with --hh-accent as a fill. */
   --hh-text-on-accent: oklch(0.09 0.01 180);
   --hh-text-inverse: oklch(0.97 0.006 90);
 
@@ -188,27 +210,29 @@ h1, h2, h3, h4, h5, h6,
   --hh-border: oklch(0.4 0.012 90);
   --hh-border-strong: oklch(0.56 0.012 90);
 
-  /* Accent / brand - brighter green than light mode, tuned separately for fill use
-     (paired with --hh-text-on-accent) vs standalone text use (--hh-accent-text). */
-  --hh-accent: oklch(0.6 0.15 150);
+  /* Accent / brand - same hue (158) as the light palette's brand-doc accent, lifted in
+     lightness/chroma for dark-surface contrast. Unlike light mode, one value cleanly
+     serves both fill duty (>=3:1 vs dark bg-page, paired with --hh-text-on-accent) and
+     standalone text duty (>=4.5:1 vs dark bg-page) - verified, no separate variant needed. */
+  --hh-accent: oklch(0.68 0.19 158);
   --hh-accent-subtle: color-mix(in oklch, var(--hh-accent) 10%, var(--hh-bg-page));
-  --hh-accent-text: oklch(0.78 0.16 150);
+  --hh-accent-text: oklch(0.68 0.19 158);
 
-  /* Links - use the brighter --hh-accent-text so inline links read clearly on the page. */
-  --hh-link: var(--hh-accent-text);
-  --hh-link-hover: color-mix(in oklch, var(--hh-accent-text) 85%, white);
-  --hh-link-visited: color-mix(in oklch, var(--hh-accent-text) 55%, var(--hh-text-secondary));
+  /* Links */
+  --hh-link: var(--hh-accent);
+  --hh-link-hover: color-mix(in oklch, var(--hh-accent) 85%, white);
+  --hh-link-visited: color-mix(in oklch, var(--hh-accent) 55%, var(--hh-text-secondary));
 
   /* Focus */
-  --hh-focus-ring: var(--hh-accent-text);
+  --hh-focus-ring: var(--hh-accent);
 
   /* Status */
-  --hh-success: var(--hh-accent-text);
+  --hh-success: var(--hh-accent);
   --hh-warning: oklch(0.78 0.15 75);
   --hh-error: oklch(0.68 0.19 25);
 
   /* Selection */
-  --hh-selection-bg: color-mix(in oklch, var(--hh-accent-text) 25%, var(--hh-bg-page));
+  --hh-selection-bg: color-mix(in oklch, var(--hh-accent) 25%, var(--hh-bg-page));
   --hh-selection-text: var(--hh-text-strong);
 
   /* Shadow - dark surfaces need deeper/more opaque shadows to read at all. */
@@ -224,13 +248,13 @@ h1, h2, h3, h4, h5, h6,
   --hh-highlight-goal-bg: oklch(0.4 0.1 145);
   --hh-highlight-goal-text: oklch(0.95 0.02 145);
 
-  --ifm-color-primary: #40ecf2;
-  --ifm-color-primary-dark: #32eaf1;
-  --ifm-color-primary-darker: #24e9f0;
-  --ifm-color-primary-darkest: #10dee5;
-  --ifm-color-primary-light: #4fedf3;
-  --ifm-color-primary-lighter: #5deff4;
-  --ifm-color-primary-lightest: #79f2f6;
+  --ifm-color-primary: var(--hh-accent);
+  --ifm-color-primary-dark: color-mix(in oklch, var(--hh-accent) 90%, black);
+  --ifm-color-primary-darker: color-mix(in oklch, var(--hh-accent) 80%, black);
+  --ifm-color-primary-darkest: color-mix(in oklch, var(--hh-accent) 60%, black);
+  --ifm-color-primary-light: color-mix(in oklch, var(--hh-accent) 90%, white);
+  --ifm-color-primary-lighter: color-mix(in oklch, var(--hh-accent) 80%, white);
+  --ifm-color-primary-lightest: color-mix(in oklch, var(--hh-accent) 60%, white);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 
   color-scheme: dark;

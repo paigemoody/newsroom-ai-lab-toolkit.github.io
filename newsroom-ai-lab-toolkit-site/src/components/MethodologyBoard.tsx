@@ -6,6 +6,18 @@ const CSS = `
   .mb-page { padding: 2.5rem 1.25rem; }
   @media (min-width: 768px) { .mb-page { padding-left: 3rem; padding-right: 3rem; } }
   .mb-nav-btn { transition: opacity 0.15s, background 0.15s, border-color 0.15s, color 0.15s; }
+  /* Accent is a 10%-rule brand color, not a default button fill - ink by default,
+     accent only on hover/focus (brand design system usage discipline). */
+  .mb-next-btn { border-color: var(--hh-text-strong); background: var(--hh-text-strong); color: var(--hh-bg-page); }
+  .mb-next-btn:hover, .mb-next-btn:focus-visible {
+    border-color: var(--hh-accent);
+    background: var(--hh-accent);
+    color: var(--hh-text-on-accent);
+  }
+  .mb-next-btn:focus-visible {
+    outline: 2px solid var(--hh-focus-ring);
+    outline-offset: 2px;
+  }
   .mb-dot { transition: width 0.2s ease, background 0.2s ease; }
   .mb-arc-travel-dot { animation: arc-travel 0.65s ease-in-out forwards; }
   @keyframes arc-travel {
@@ -557,11 +569,11 @@ export default function MethodologyBoard() {
 
   const navFooter = (
     <div style={{ display:'flex', alignItems:'center', gap:'0.5rem' }}>
-      <button onClick={handlePrev}
+      <button type="button" onClick={handlePrev}
         style={{ ...Gs, padding:'0.375rem 0.875rem', borderRadius:'0.375rem', border:`2px solid ${c.border}`, background:c.paper, cursor: idx === 0 ? 'default' : 'pointer', fontWeight:600, fontSize:'0.85rem', color:c.ink, opacity: idx === 0 ? 0 : 1, transition:'opacity 0.15s' }}
       >←</button>
-      <button onClick={handleNext}
-        style={{ ...Gs, padding:'0.375rem 0.875rem', borderRadius:'0.375rem', border:`2px solid ${c.accent}`, background:c.accent, cursor:'pointer', fontWeight:600, fontSize:'0.85rem', color:c.paper, transition:'opacity 0.15s' }}
+      <button type="button" className="mb-next-btn" onClick={handleNext}
+        style={{ ...Gs, padding:'0.375rem 0.875rem', borderRadius:'0.375rem', border:'2px solid', cursor:'pointer', fontWeight:600, fontSize:'0.85rem' }}
       >→</button>
     </div>
   );

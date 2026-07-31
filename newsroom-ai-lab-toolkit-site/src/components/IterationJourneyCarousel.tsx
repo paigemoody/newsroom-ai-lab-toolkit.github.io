@@ -27,7 +27,7 @@ function JourneyCard({ item }: { item: JourneyStep }) {
       {item.emoji && !item.image && (
         <div style={{ fontSize: 56, textAlign: 'center', marginBottom: '0.75rem' }}>{item.emoji}</div>
       )}
-      <h3 style={{ marginTop: 0, marginBottom: '0.5rem', fontSize: '1.1rem' }}>{item.label}</h3>
+      <h3 style={{ marginTop: 0, marginBottom: '0.5rem', fontSize: '1.1rem', fontFamily: 'var(--font-ui)' }}>{item.label}</h3>
       {(item.statement || item.body) && (
         <div style={{ margin: item.feedback ? '0 0 1rem' : 0 }}>
           {item.statement ? (

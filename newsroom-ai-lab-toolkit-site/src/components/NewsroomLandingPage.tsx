@@ -67,6 +67,22 @@ export default function NewsroomLandingPage() {
         .landing-container * { box-sizing: border-box; }
         .section-dark a { color: color-mix(in oklch, var(--hh-accent) 80%, var(--hh-text-inverse)); }
         .section-dark a:hover { color: var(--hh-text-inverse); }
+
+        /* Accent is a 10%-rule brand color, not a default button fill - ink by default,
+           accent only on hover/focus (brand design system usage discipline). */
+        .hh-cta-btn {
+          background-color: var(--hh-text-strong);
+          color: var(--hh-bg-page);
+          transition: background-color 0.15s ease, color 0.15s ease;
+        }
+        .hh-cta-btn:hover, .hh-cta-btn:focus-visible {
+          background-color: var(--hh-accent);
+          color: var(--hh-text-on-accent);
+        }
+        .hh-cta-btn:focus-visible {
+          outline: 2px solid var(--hh-focus-ring);
+          outline-offset: 2px;
+        }
       `}</style>
 
       <div className="landing-container" style={{ minHeight: '100vh', backgroundColor: 'var(--hh-bg-page)' }}>
@@ -168,9 +184,8 @@ export default function NewsroomLandingPage() {
             <div style={{ marginTop: '3rem' }}>
               <Link
                 to="/docs/how-this-works"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.625rem', backgroundColor: 'var(--hh-accent)', color: 'var(--hh-text-on-accent)', fontFamily: 'var(--font-display)', fontWeight: '600', fontSize: '1.25rem', padding: '1rem 2.25rem', borderRadius: '0.375rem', textDecoration: 'none' }}
-                onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.85'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}
+                className="hh-cta-btn"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.625rem', fontFamily: 'var(--font-display)', fontWeight: '600', fontSize: '1.25rem', padding: '1rem 2.25rem', borderRadius: '0.375rem', textDecoration: 'none' }}
               >
                 / Get Started <ArrowRight size={20} />
               </Link>
