@@ -4,6 +4,16 @@
  * work well for content-centric websites.
  */
 
+/* Infima's sticky navbar sets neither scroll-padding nor scroll-margin anywhere, so
+   jumping to an anchor (TOC links, "Next"/"Previous" pagination) or tabbing to a
+   focusable element near the top of a page can land it directly under the navbar,
+   hidden from view (WCAG 2.2's Focus Not Obscured, 2.4.11). scroll-padding-top on the
+   scrolling root fixes both cases at once, since it applies to every scroll-into-view
+   operation - anchor navigation and keyboard focus alike. */
+html {
+  scroll-padding-top: calc(var(--ifm-navbar-height) + 1rem);
+}
+
 /* Chakra Petch is the display font for genuine headings (article H1, in-content H2/H3) -
    NOT for card-list titles, which the brand design system keeps in the UI sans (Geist) for
    scanning vs. reading. Carousel card titles (BenefitsCarousel, IterationJourneyCarousel,
@@ -96,14 +106,25 @@ h1, h2, h3, h4, h5, h6,
   --hh-highlight-goal-bg: #b6d7a8;
   --hh-highlight-goal-text: oklch(0.19 0.01 180);
 
-  /* Fixed - identical in both themes. Pairs with --hh-text-inverse. Used for the
-     handful of decorative bands that are intentionally always dark regardless of site
-     theme: the CTA banner, the footer, the landing page hero, and the partner-logo strip. */
+  /* Intentionally-dark decorative band (CTA banner, footer, landing page hero) - always
+     dark regardless of site theme. Overridden (lightened) in [data-theme='dark'] below -
+     see that override for why it isn't numerically fixed. */
   --hh-inverse-surface: oklch(0.18 0.01 180);
+  /* Fixed - identical in both themes, and NOT lightened in dark mode like
+     --hh-inverse-surface above. The partner-newsroom logos were manually prepared
+     (several use a forced-white filter) against this exact near-black tone - lightening
+     it would break their contrast/legibility, so it stays pinned regardless of theme. */
+  --hh-partner-strip-bg: oklch(0.18 0.01 180);
   /* Fixed - identical in both themes. The light-mode --hh-accent (tuned against the light
      paper background) only hits 3.95:1 against --hh-inverse-surface, so links on the
-     fixed-dark band need this dedicated always-bright accent instead of var(--hh-accent). */
+     fixed-dark band need this dedicated always-bright accent instead of var(--hh-accent).
+     Re-verified against the lightened dark-mode --hh-inverse-surface too (still >=4.5:1). */
   --hh-accent-inverse: oklch(0.68 0.19 158);
+  /* Fixed - identical in both themes. Frame for images drawn on a white canvas with no
+     dark-mode variant (docs process diagrams) - per the ticket's fallback option, an
+     intentional light "mat" preserves the diagram's original contrast rather than letting
+     it float as a broken white rectangle on a dark page. */
+  --hh-image-frame-bg: oklch(0.99 0.005 90);
 
   /* Fonts */
   --font-display: 'Chakra Petch', sans-serif;
@@ -131,6 +152,10 @@ h1, h2, h3, h4, h5, h6,
   --ifm-font-family-base: var(--font-ui);
   --ifm-code-font-size: 95%;
   --ifm-background-color: var(--hh-bg-page);
+  /* Infima's own default (--ifm-background-surface-color, itself defaulting to pure
+     white/#242526) is unrelated to the brand paper/ink tones - the navbar was rendering
+     off-brand white instead of --hh-bg-page's subtle warm tint. */
+  --ifm-navbar-background-color: var(--hh-bg-page);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
@@ -196,6 +221,15 @@ h1, h2, h3, h4, h5, h6,
   --hh-surface-primary: oklch(0.22 0.014 90);
   --hh-surface-secondary: oklch(0.26 0.012 90);
   --hh-surface-elevated: oklch(0.31 0.012 90);
+  /* The fixed-dark band (hero, partner strip, CtaBanner, footer) uses the SAME
+     oklch(0.18 0.01 180) as light mode by default (see :root), which was nearly
+     identical to this theme's own page background (0.17) - the two read as one
+     undifferentiated dark mass. WCAG-style contrast ratio is a poor judge of whether two
+     solid fills are distinguishable (it's calibrated for text legibility, not swatch
+     differentiation, and stays near 1:1 for any two low-lightness colors regardless of
+     their actual gap) - what matters here is a real, visually-verified lightness step.
+     Lightened specifically for this theme rather than kept numerically fixed. */
+  --hh-inverse-surface: oklch(0.34 0.01 180);
 
   /* Text */
   --hh-text-strong: oklch(0.97 0.006 180);

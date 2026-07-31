@@ -141,7 +141,7 @@ export default function NewsroomLandingPage() {
             </div>
           </div>
           {credibility.partners?.length > 0 && (
-            <div style={{ backgroundColor: 'var(--hh-inverse-surface)', paddingTop: '1.25rem', margin: '0 -1.5rem' }}>
+            <div style={{ backgroundColor: 'var(--hh-partner-strip-bg)', paddingTop: '1.25rem', margin: '0 -1.5rem' }}>
               <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '0 1.5rem' }}>
                 <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.75rem', fontWeight: '600', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'color-mix(in oklch, var(--hh-text-inverse) 75%, transparent)', margin: 0 }}>
                   Partner newsrooms
