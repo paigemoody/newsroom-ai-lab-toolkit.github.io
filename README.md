@@ -52,7 +52,7 @@ Intentional visual change: review the reported diff, then regenerate and commit 
 npm run test:visual:update
 ```
 
-`docs/qa-code-sample.md` is an unlisted fixture page (not in the sidebar) that exists solely so the suite has real Prism code blocks to test against.
+`src/pages/qa-code-sample.md` is a fixture page (lives outside `docs/`, so it has no sidebar association and never appears in navigation or search) that exists solely so the suite has real Prism code blocks to test against.
 
 CI runs this suite on every pull request via `.github/workflows/visual-tests.yml`.
 

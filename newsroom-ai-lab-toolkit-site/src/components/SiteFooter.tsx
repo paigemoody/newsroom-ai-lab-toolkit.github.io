@@ -3,8 +3,8 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 const footerStyle: React.CSSProperties = {
   padding: '2rem 1.5rem',
-  backgroundColor: 'var(--hh-text-strong)',
-  color: 'color-mix(in oklch, var(--hh-bg-page) 70%, transparent)',
+  backgroundColor: 'var(--hh-inverse-surface)',
+  color: 'color-mix(in oklch, var(--hh-text-inverse) 70%, transparent)',
   fontFamily: 'var(--font-ui)',
 };
 
@@ -22,7 +22,7 @@ export default function SiteFooter() {
     <footer style={footerStyle}>
       <div style={{ maxWidth: '64rem', margin: '0 auto', textAlign: 'center' }}>
         <div style={{ marginBottom: '2rem' }}>
-          <span style={{ fontFamily: 'var(--font-ui)', fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'color-mix(in oklch, var(--hh-bg-page) 45%, transparent)', display: 'block', marginBottom: '1rem' }}>
+          <span style={{ fontFamily: 'var(--font-ui)', fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'color-mix(in oklch, var(--hh-text-inverse) 45%, transparent)', display: 'block', marginBottom: '1rem' }}>
             Supported by
           </span>
           <a href="https://www.mcgovern.org" target="_blank" rel="noopener noreferrer">
@@ -30,7 +30,7 @@ export default function SiteFooter() {
           </a>
         </div>
         <p style={{ marginTop: '1.5rem', fontSize: '0.875rem' }}>
-          Copyright © {new Date().getFullYear()} <a href="https://www.hackshackers.com/" style={accentLinkStyle} onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--hh-bg-page)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--hh-accent)'; }}>Hacks/Hackers</a>
+          Copyright © {new Date().getFullYear()} <a href="https://www.hackshackers.com/" style={accentLinkStyle} onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--hh-text-inverse)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--hh-accent)'; }}>Hacks/Hackers</a>
         </p>
       </div>
     </footer>

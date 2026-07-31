@@ -65,19 +65,19 @@ export default function NewsroomLandingPage() {
 
         .landing-container { font-family: var(--font-ui); }
         .landing-container * { box-sizing: border-box; }
-        .section-dark a { color: color-mix(in oklch, var(--hh-accent) 80%, var(--hh-bg-page)); }
-        .section-dark a:hover { color: var(--hh-bg-page); }
+        .section-dark a { color: color-mix(in oklch, var(--hh-accent) 80%, var(--hh-text-inverse)); }
+        .section-dark a:hover { color: var(--hh-text-inverse); }
       `}</style>
 
       <div className="landing-container" style={{ minHeight: '100vh', backgroundColor: 'var(--hh-bg-page)' }}>
 
         {/* Hero */}
-        <section style={{ backgroundColor: 'var(--hh-text-strong)', color: 'var(--hh-bg-page)', padding: '5rem 1.5rem 2.5rem' }}>
+        <section style={{ backgroundColor: 'var(--hh-inverse-surface)', color: 'var(--hh-text-inverse)', padding: '5rem 1.5rem 2.5rem' }}>
           <div style={{ maxWidth: '64rem', margin: '0 auto' }}>
             <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '1.5rem', lineHeight: '1.2', fontFamily: 'var(--font-display)' }}>
               <MD>{hero.headline}</MD>
             </h1>
-            <p style={{ fontSize: '1.25rem', marginBottom: '2rem', lineHeight: '1.75', maxWidth: '48rem', fontFamily: 'var(--font-editorial)', color: 'color-mix(in oklch, var(--hh-bg-page) 90%, transparent)' }}>
+            <p style={{ fontSize: '1.25rem', marginBottom: '2rem', lineHeight: '1.75', maxWidth: '48rem', fontFamily: 'var(--font-editorial)', color: 'color-mix(in oklch, var(--hh-text-inverse) 90%, transparent)' }}>
               <MD>{hero.subheading}</MD>
             </p>
           </div>
@@ -125,9 +125,9 @@ export default function NewsroomLandingPage() {
             </div>
           </div>
           {credibility.partners?.length > 0 && (
-            <div style={{ backgroundColor: 'var(--hh-text-strong)', paddingTop: '1.25rem', margin: '0 -1.5rem' }}>
+            <div style={{ backgroundColor: 'var(--hh-inverse-surface)', paddingTop: '1.25rem', margin: '0 -1.5rem' }}>
               <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '0 1.5rem' }}>
-                <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.75rem', fontWeight: '600', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'color-mix(in oklch, var(--hh-bg-page) 75%, transparent)', margin: 0 }}>
+                <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.75rem', fontWeight: '600', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'color-mix(in oklch, var(--hh-text-inverse) 75%, transparent)', margin: 0 }}>
                   Partner newsrooms
                 </p>
               </div>
@@ -168,7 +168,7 @@ export default function NewsroomLandingPage() {
             <div style={{ marginTop: '3rem' }}>
               <Link
                 to="/docs/how-this-works"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.625rem', backgroundColor: 'var(--hh-accent)', color: 'var(--hh-bg-page)', fontFamily: 'var(--font-display)', fontWeight: '600', fontSize: '1.25rem', padding: '1rem 2.25rem', borderRadius: '0.375rem', textDecoration: 'none' }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.625rem', backgroundColor: 'var(--hh-accent)', color: 'var(--hh-text-on-accent)', fontFamily: 'var(--font-display)', fontWeight: '600', fontSize: '1.25rem', padding: '1rem 2.25rem', borderRadius: '0.375rem', textDecoration: 'none' }}
                 onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.85'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}
               >

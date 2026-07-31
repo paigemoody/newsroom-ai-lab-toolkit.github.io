@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 /**
  * Full-page visual regression baseline. Each spec loads a page that exercises a
- * distinct set of custom components (see docs/qa-code-sample.md for why a dedicated
+ * distinct set of custom components (see src/pages/qa-code-sample.md for why a dedicated
  * code-block fixture page exists - no such page existed in real content).
  */
 
@@ -34,8 +34,8 @@ test('doc page - problem statement examples / ProblemStatementCarousel + TaskRes
   await expect(page).toHaveScreenshot('doc-problem-statement-examples.png', { fullPage: true });
 });
 
-test('doc page - QA code sample / Prism code blocks', async ({ page }) => {
-  await page.goto('docs/qa-code-sample');
+test('page - QA code sample / Prism code blocks', async ({ page }) => {
+  await page.goto('qa-code-sample');
   await expect(page.getByRole('heading', { name: 'QA: Code sample' })).toBeVisible();
   await expect(page).toHaveScreenshot('doc-code-sample.png', { fullPage: true });
 });
