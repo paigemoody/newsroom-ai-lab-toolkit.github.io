@@ -144,7 +144,11 @@ const config: Config = {
       ],
     },
     prism: {
-      theme: prismThemes.github,
+      // prismThemes.github (the Docusaurus default) fails WCAG AA contrast for several
+      // token colors against its own background (axe-core caught it: function names and
+      // strings both under 4.5:1) - vsLight's tokens clear 4.5:1 for everything this site's
+      // code samples actually use (function/keyword ~8.6:1, string ~7.9:1).
+      theme: prismThemes.vsLight,
       darkTheme: prismThemes.dracula,
     },
   } satisfies Preset.ThemeConfig,
