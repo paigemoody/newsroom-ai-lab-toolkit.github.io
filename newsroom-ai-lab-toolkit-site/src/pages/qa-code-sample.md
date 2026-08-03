@@ -14,9 +14,8 @@ This page exists only for automated testing of Prism code blocks (inline code, f
 code, and line highlighting). It lives in `src/pages/`, not `docs/`, specifically so it
 has no association with any docs sidebar and never appears in site navigation or search.
 
-Currently used by the light-mode visual-regression suite. Dark-theme and accessibility
-(`@axe-core/playwright`) coverage of this page are planned once dark-mode theming
-lands - see the project's dark-mode tracking plan.
+Used by the visual-regression suite (light, dark, and mobile-light projects) and by the
+`@axe-core/playwright` accessibility scan in `tests/a11y/`.
 
 Inline code: `const example = true;`
 

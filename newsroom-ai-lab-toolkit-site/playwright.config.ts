@@ -5,16 +5,15 @@ const BASE_PATH = '/newsroom-ai-lab-toolkit.github.io/';
 const BASE_URL = `http://localhost:${PORT}${BASE_PATH}`;
 
 /**
- * Visual-regression harness for the Playbook site.
+ * Visual-regression + accessibility harness for the Playbook site.
  *
  * Runs against a production build (`docusaurus build` + `docusaurus serve`), per the
  * ticket's requirement to test the real production output rather than the dev server.
  *
- * Only a light-mode desktop project exists today (Phase 0 of the dark-mode rollout).
- * Dark-mode and mobile-viewport projects, plus `@axe-core/playwright` accessibility
- * specs, are added in Phase 9 once dark theming actually exists end-to-end - adding
- * the projects is a config-only change, since specs are written against page
- * paths/components, not against a specific theme.
+ * dark-desktop relies on Docusaurus's `respectPrefersColorScheme` reading the
+ * OS-level `prefers-color-scheme` on a *fresh* context (no stored theme choice) -
+ * verified empirically that `colorScheme: 'dark'` alone is sufficient to flip
+ * `data-theme` to `dark` on first load, no `localStorage` seeding required.
  */
 export default defineConfig({
   testDir: './tests',
@@ -45,6 +44,20 @@ export default defineConfig({
       name: 'light-desktop',
       use: {
         ...devices['Desktop Chrome'],
+        colorScheme: 'light',
+      },
+    },
+    {
+      name: 'dark-desktop',
+      use: {
+        ...devices['Desktop Chrome'],
+        colorScheme: 'dark',
+      },
+    },
+    {
+      name: 'mobile-light',
+      use: {
+        ...devices['Pixel 5'],
         colorScheme: 'light',
       },
     },

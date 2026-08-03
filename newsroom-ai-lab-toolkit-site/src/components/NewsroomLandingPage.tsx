@@ -14,15 +14,15 @@ function MD({ children, style }: { children: string; style?: React.CSSProperties
   return <span dangerouslySetInnerHTML={{ __html: md(children) }} style={style} />;
 }
 
-function PartnerLogo({ partner }: { partner: { name: string; logo: string; href?: string; invert?: boolean; containerWidth?: number; maxHeight?: string } }) {
+function PartnerLogo({ partner, duplicate }: { partner: { name: string; logo: string; href?: string; invert?: boolean; containerWidth?: number; maxHeight?: string }; duplicate?: boolean }) {
   const src = useBaseUrl(partner.logo);
   const width = partner.containerWidth ?? 140;
   const maxHeight = partner.maxHeight ?? '2.25rem';
-  const img = <img src={src} alt={partner.name} style={{ maxWidth: '100%', maxHeight, width: 'auto', height: 'auto', objectFit: 'contain', opacity: 0.9, filter: partner.invert ? 'brightness(0) invert(1)' : undefined }} />;
+  const img = <img src={src} alt={duplicate ? '' : partner.name} style={{ maxWidth: '100%', maxHeight, width: 'auto', height: 'auto', objectFit: 'contain', opacity: 0.9, filter: partner.invert ? 'brightness(0) invert(1)' : undefined }} />;
   return (
     <div style={{ width: `${width}px`, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 2rem' }}>
       {partner.href
-        ? <a href={partner.href} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', opacity: 1, transition: 'opacity 0.2s' }} onMouseEnter={e => e.currentTarget.style.opacity = '0.7'} onMouseLeave={e => e.currentTarget.style.opacity = '1'}>{img}</a>
+        ? <a href={partner.href} target="_blank" rel="noopener noreferrer" className="partner-logo-link" tabIndex={duplicate ? -1 : 0} aria-hidden={duplicate || undefined}>{img}</a>
         : img}
     </div>
   );
@@ -43,11 +43,6 @@ export default function NewsroomLandingPage() {
   return (
     <>
       <style>{`
-        @keyframes blink {
-          0%, 50% { opacity: 1; }
-          51%, 100% { opacity: 0; }
-        }
-
         @keyframes marquee {
           from { transform: translateX(0); }
           to { transform: translateX(-50%); }
@@ -66,7 +61,34 @@ export default function NewsroomLandingPage() {
         .landing-container { font-family: var(--font-ui); }
         .landing-container * { box-sizing: border-box; }
         .section-dark a { color: color-mix(in oklch, var(--hh-accent) 80%, var(--hh-text-inverse)); }
-        .section-dark a:hover { color: var(--hh-text-inverse); }
+        .section-dark a:hover, .section-dark a:focus-visible { color: var(--hh-text-inverse); }
+        .section-dark a:focus-visible {
+          outline: 2px solid var(--hh-focus-ring);
+          outline-offset: 2px;
+        }
+
+        .partner-logo-link { display: flex; align-items: center; opacity: 1; transition: opacity 0.2s; }
+        .partner-logo-link:hover, .partner-logo-link:focus-visible { opacity: 0.7; }
+        .partner-logo-link:focus-visible {
+          outline: 2px solid var(--hh-focus-ring);
+          outline-offset: 2px;
+        }
+
+        /* Accent is a 10%-rule brand color, not a default button fill - ink by default,
+           accent only on hover/focus (brand design system usage discipline). */
+        .hh-cta-btn {
+          background-color: var(--hh-text-strong);
+          color: var(--hh-bg-page);
+          transition: background-color 0.15s ease, color 0.15s ease;
+        }
+        .hh-cta-btn:hover, .hh-cta-btn:focus-visible {
+          background-color: var(--hh-accent);
+          color: var(--hh-text-on-accent);
+        }
+        .hh-cta-btn:focus-visible {
+          outline: 2px solid var(--hh-focus-ring);
+          outline-offset: 2px;
+        }
       `}</style>
 
       <div className="landing-container" style={{ minHeight: '100vh', backgroundColor: 'var(--hh-bg-page)' }}>
@@ -125,7 +147,7 @@ export default function NewsroomLandingPage() {
             </div>
           </div>
           {credibility.partners?.length > 0 && (
-            <div style={{ backgroundColor: 'var(--hh-inverse-surface)', paddingTop: '1.25rem', margin: '0 -1.5rem' }}>
+            <div style={{ backgroundColor: 'var(--hh-partner-strip-bg)', paddingTop: '1.25rem', margin: '0 -1.5rem' }}>
               <div style={{ maxWidth: '64rem', margin: '0 auto', padding: '0 1.5rem' }}>
                 <p style={{ fontFamily: 'var(--font-display)', fontSize: '0.75rem', fontWeight: '600', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'color-mix(in oklch, var(--hh-text-inverse) 75%, transparent)', margin: 0 }}>
                   Partner newsrooms
@@ -133,8 +155,12 @@ export default function NewsroomLandingPage() {
               </div>
               <div style={{ padding: '0.5rem 0 1rem', overflow: 'hidden', WebkitMaskImage: 'linear-gradient(to right, transparent 1.5rem, black 3.5rem, black calc(100% - 3.5rem), transparent calc(100% - 1.5rem))', maskImage: 'linear-gradient(to right, transparent 1.5rem, black 3.5rem, black calc(100% - 3.5rem), transparent calc(100% - 1.5rem))' }}>
                 <div className="partner-marquee">
+                  {/* Duplicated for the seamless scroll loop - the second half is the same
+                      links again, so it's hidden from the tab order and a11y tree
+                      (tabIndex=-1 + aria-hidden) rather than making keyboard/screen-reader
+                      users tab through the same 8 partners twice. */}
                   {[...credibility.partners, ...credibility.partners].map((partner: any, i: number) => (
-                    <PartnerLogo key={i} partner={partner} />
+                    <PartnerLogo key={i} partner={partner} duplicate={i >= credibility.partners.length} />
                   ))}
                 </div>
               </div>
@@ -168,9 +194,8 @@ export default function NewsroomLandingPage() {
             <div style={{ marginTop: '3rem' }}>
               <Link
                 to="/docs/how-this-works"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.625rem', backgroundColor: 'var(--hh-accent)', color: 'var(--hh-text-on-accent)', fontFamily: 'var(--font-display)', fontWeight: '600', fontSize: '1.25rem', padding: '1rem 2.25rem', borderRadius: '0.375rem', textDecoration: 'none' }}
-                onMouseEnter={(e) => { e.currentTarget.style.opacity = '0.85'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.opacity = '1'; }}
+                className="hh-cta-btn"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.625rem', fontFamily: 'var(--font-display)', fontWeight: '600', fontSize: '1.25rem', padding: '1rem 2.25rem', borderRadius: '0.375rem', textDecoration: 'none' }}
               >
                 / Get Started <ArrowRight size={20} />
               </Link>

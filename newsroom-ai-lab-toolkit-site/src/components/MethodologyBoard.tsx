@@ -6,7 +6,46 @@ const CSS = `
   .mb-page { padding: 2.5rem 1.25rem; }
   @media (min-width: 768px) { .mb-page { padding-left: 3rem; padding-right: 3rem; } }
   .mb-nav-btn { transition: opacity 0.15s, background 0.15s, border-color 0.15s, color 0.15s; }
+  /* Accent is a 10%-rule brand color, not a default button fill - ink by default,
+     accent only on hover/focus (brand design system usage discipline). */
+  .mb-next-btn { border-color: var(--hh-text-strong); background: var(--hh-text-strong); color: var(--hh-bg-page); }
+  .mb-next-btn:hover, .mb-next-btn:focus-visible {
+    border-color: var(--hh-accent);
+    background: var(--hh-accent);
+    color: var(--hh-text-on-accent);
+  }
+  .mb-next-btn:focus-visible {
+    outline: 2px solid var(--hh-focus-ring);
+    outline-offset: 2px;
+  }
   .mb-dot { transition: width 0.2s ease, background 0.2s ease; }
+  /* Empathize's label is anchored left (not centered) since its segment is a single
+     step wide, but even left-anchored + shrunk it still collides with Define's label
+     below ~480px (their segments just don't have enough combined width for both words).
+     Showing only the active phase's label at that width sidesteps the collision
+     entirely instead of chasing font-size - the dot fill/color already conveys progress
+     for the non-active phases, so nothing is lost, only deferred until it's that
+     phase's turn. !important overrides the inline font-size/letter-spacing (used for
+     the active-step bold/enlarge treatment), which otherwise always wins over a class. */
+  @media (max-width: 480px) {
+    .mb-phase-label {
+      font-size: 0.7rem !important;
+      letter-spacing: 0.03em !important;
+    }
+    .mb-phase-label[data-mb-phase-active="false"] {
+      display: none;
+    }
+  }
+  /* Phase-transition dots set border/background inline (state-dependent), so hover/focus
+     feedback has to use a property inline styles don't touch - box-shadow + outline - or
+     an inline style's specificity would silently win and hide the affordance. */
+  .mb-phase-dot:hover, .mb-phase-dot:focus-visible {
+    box-shadow: 0 0 0 4px color-mix(in oklch, var(--hh-accent) 30%, transparent);
+  }
+  .mb-phase-dot:focus-visible {
+    outline: 2px solid var(--hh-focus-ring);
+    outline-offset: 2px;
+  }
   .mb-arc-travel-dot { animation: arc-travel 0.65s ease-in-out forwards; }
   @keyframes arc-travel {
     from { stroke-dashoffset: 0; }
@@ -38,7 +77,9 @@ function Block({ n, total, title, note, children, footer }: { n: string; total?:
       <div style={{ padding:'1.75rem 1.75rem 1.25rem', borderBottom:`1px solid ${c.border}`, background:c.surface }}>
         <div style={{ display:'flex', alignItems:'flex-start', gap:'1rem' }}>
           <span style={{ ...Cp, fontSize:36, fontWeight:300, color:c.accent, flexShrink:0, lineHeight:1, marginTop:'-0.125rem' }}>
-            {n}{total && <span style={{ fontSize:16, opacity:0.45 }}>/{total}</span>}
+            {/* De-emphasized via c.textSec, not opacity - opacity on top of the inherited
+                accent color dropped contrast to 1.94:1 against the card header (axe-caught). */}
+            {n}{total && <span style={{ fontSize:16, color:c.textSec }}>/{total}</span>}
           </span>
           <div style={{ flex:1 }}>
             <h2 style={{ ...Cp, fontSize:22, fontWeight:600, color:c.ink, margin:'0 0 0.5rem', lineHeight:1.2 }}>{title}</h2>
@@ -154,14 +195,14 @@ function CombinedProgress({ steps, currentIdx, onStep, isLooping, triggerLoop }:
           const isLabeledPhaseStart = i === 0 || i === 1;
           const size = isLabeledPhaseStart ? DOT_BIG : DOT_SMALL;
           return (
-            <button key={i} onClick={() => !isLooping && onStep(nextPhaseFirstIdx)} title={`Start of ${PHASE_SPANS[i + 1].label}`}
+            <button key={i} className="mb-phase-dot" onClick={() => !isLooping && onStep(nextPhaseFirstIdx)} title={`Start of ${PHASE_SPANS[i + 1].label}`}
               style={{ position:'absolute', left:`${b}%`, top:'50%', transform:'translate(-50%, -50%)', width:size, height:size, borderRadius:'50%', border:`${isLabeledPhaseStart ? 2 : 1.5}px solid ${passed ? c.accent : c.border}`, background: passed ? c.accent : c.paper, cursor:'pointer', padding:0, transition:'all 0.2s ease', zIndex:2 }}
             />
           );
         })}
 
         {/* End node - triggers loop back to Ideate start */}
-        <button onClick={triggerLoop} title="Loop back to Ideate · Prototype · Test"
+        <button className="mb-phase-dot" onClick={triggerLoop} title="Loop back to Ideate · Prototype · Test"
           style={{ position:'absolute', left:'100%', top:'50%', transform:'translate(-50%, -50%)', width:DOT_SMALL, height:DOT_SMALL, borderRadius:'50%', border:`1.5px solid ${currentIdx === total - 1 ? c.accent : c.border}`, background: currentIdx === total - 1 ? c.accent : c.paper, transition:'all 0.2s ease', zIndex:2, cursor:'pointer', padding:0 }}
         />
       </div>
@@ -171,16 +212,20 @@ function CombinedProgress({ steps, currentIdx, onStep, isLooping, triggerLoop }:
         {PHASE_SPANS.slice(0, 2).map((phase, pi) => {
           const mid = (segRanges[pi].left + segRanges[pi].right) / 2;
           const active = currentPhase === pi;
+          // Empathize's segment is a single step wide, so centering its label on the
+          // segment midpoint pushes it into Define's label at narrow viewports - anchor
+          // it to the bar start instead (matches its start-node dot at left:0%).
+          const isFirst = pi === 0;
           return (
-            <div key={pi} style={{ position:'absolute', left:`${mid}%`, transform:'translateX(-50%)' }}>
-              <span style={{ ...Cp, fontSize: active ? '0.9rem' : '0.75rem', fontWeight: active ? 700 : 400, color: active ? c.ink : c.textSec, textTransform:'uppercase', letterSpacing:'0.07em', whiteSpace:'nowrap', transition:'color 0.2s ease, font-size 0.2s ease' }}>
+            <div key={pi} style={{ position:'absolute', left: isFirst ? '0%' : `${mid}%`, transform: isFirst ? 'translateX(0)' : 'translateX(-50%)' }}>
+              <span className="mb-phase-label" data-mb-phase-active={active} style={{ ...Cp, fontSize: active ? '0.9rem' : '0.75rem', fontWeight: active ? 700 : 400, color: active ? c.ink : c.textSec, textTransform:'uppercase', letterSpacing:'0.07em', whiteSpace:'nowrap', transition:'color 0.2s ease, font-size 0.2s ease' }}>
                 {phase.label}
               </span>
             </div>
           );
         })}
         <div style={{ position:'absolute', left:`${(segRanges[2].left + 100) / 2}%`, transform:'translateX(-50%)' }}>
-          <span style={{ ...Cp, fontSize: currentPhase >= 2 ? '0.9rem' : '0.75rem', fontWeight: currentPhase >= 2 ? 700 : 400, color: currentPhase >= 2 ? c.ink : c.textSec, textTransform:'uppercase', letterSpacing:'0.07em', whiteSpace:'nowrap', transition:'color 0.2s ease, font-size 0.2s ease' }}>
+          <span className="mb-phase-label" data-mb-phase-active={currentPhase >= 2} style={{ ...Cp, fontSize: currentPhase >= 2 ? '0.9rem' : '0.75rem', fontWeight: currentPhase >= 2 ? 700 : 400, color: currentPhase >= 2 ? c.ink : c.textSec, textTransform:'uppercase', letterSpacing:'0.07em', whiteSpace:'nowrap', transition:'color 0.2s ease, font-size 0.2s ease' }}>
             Iterate
           </span>
         </div>
@@ -557,11 +602,11 @@ export default function MethodologyBoard() {
 
   const navFooter = (
     <div style={{ display:'flex', alignItems:'center', gap:'0.5rem' }}>
-      <button onClick={handlePrev}
+      <button type="button" onClick={handlePrev}
         style={{ ...Gs, padding:'0.375rem 0.875rem', borderRadius:'0.375rem', border:`2px solid ${c.border}`, background:c.paper, cursor: idx === 0 ? 'default' : 'pointer', fontWeight:600, fontSize:'0.85rem', color:c.ink, opacity: idx === 0 ? 0 : 1, transition:'opacity 0.15s' }}
       >←</button>
-      <button onClick={handleNext}
-        style={{ ...Gs, padding:'0.375rem 0.875rem', borderRadius:'0.375rem', border:`2px solid ${c.accent}`, background:c.accent, cursor:'pointer', fontWeight:600, fontSize:'0.85rem', color:c.paper, transition:'opacity 0.15s' }}
+      <button type="button" className="mb-next-btn" onClick={handleNext}
+        style={{ ...Gs, padding:'0.375rem 0.875rem', borderRadius:'0.375rem', borderWidth:'2px', borderStyle:'solid', cursor:'pointer', fontWeight:600, fontSize:'0.85rem' }}
       >→</button>
     </div>
   );

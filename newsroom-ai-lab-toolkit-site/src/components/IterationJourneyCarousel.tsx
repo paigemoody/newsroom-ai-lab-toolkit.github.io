@@ -18,16 +18,22 @@ function JourneyCard({ item }: { item: JourneyStep }) {
   return (
     <div>
       {item.image && (
-        <img
-          src={imageSrc}
-          alt={item.imageAlt ?? item.label}
-          style={{ width: '100%', maxHeight: 220, objectFit: 'contain', borderRadius: '0.5rem', marginBottom: '1rem', background: 'var(--ifm-color-emphasis-100)' }}
-        />
+        // These diagrams are drawn on a white canvas with no dark-mode variant - framed
+        // in a fixed light "mat" so they read as intentional rather than a broken white
+        // rectangle on a dark page (background alone doesn't help once objectFit:contain
+        // is filled edge-to-edge by the diagram's own opaque white pixels).
+        <div style={{ background: 'var(--hh-image-frame-bg)', border: '1px solid var(--hh-border)', borderRadius: '0.5rem', padding: '0.75rem', marginBottom: '1rem' }}>
+          <img
+            src={imageSrc}
+            alt={item.imageAlt ?? item.label}
+            style={{ display: 'block', width: '100%', maxHeight: 220, objectFit: 'contain' }}
+          />
+        </div>
       )}
       {item.emoji && !item.image && (
         <div style={{ fontSize: 56, textAlign: 'center', marginBottom: '0.75rem' }}>{item.emoji}</div>
       )}
-      <h3 style={{ marginTop: 0, marginBottom: '0.5rem', fontSize: '1.1rem' }}>{item.label}</h3>
+      <h3 style={{ marginTop: 0, marginBottom: '0.5rem', fontSize: '1.1rem', fontFamily: 'var(--font-ui)' }}>{item.label}</h3>
       {(item.statement || item.body) && (
         <div style={{ margin: item.feedback ? '0 0 1rem' : 0 }}>
           {item.statement ? (

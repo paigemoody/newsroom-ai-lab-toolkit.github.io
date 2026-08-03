@@ -26,18 +26,23 @@
   color: var(--ifm-color-emphasis-800);
 }
 
+/* Accent is a 10%-rule brand color, not a default button fill - ink by default,
+   accent only on hover/focus (brand design system usage discipline). Note: this class
+   is currently unused - CopyToDrive/index.tsx doesn't import this module at all (it only
+   renders the inline SVG icon) - kept correct in case it's wired up in the future. */
 .button {
   display: inline-block;
-  /* --color-teal + #fff pairing not yet contrast-verified for dark mode - Phase 4 */
-  background-color: var(--color-teal);
-  color: #fff !important;
+  background-color: var(--hh-text-strong);
+  color: var(--hh-bg-page) !important;
   font-weight: 600;
   padding: 0.6rem 1.2rem;
   border-radius: 6px;
   text-decoration: none !important;
-  transition: opacity 0.15s ease;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-.button:hover {
-  opacity: 0.85;
+.button:hover,
+.button:focus-visible {
+  background-color: var(--hh-accent);
+  color: var(--hh-text-on-accent) !important;
 }

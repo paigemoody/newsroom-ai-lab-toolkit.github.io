@@ -9,7 +9,7 @@ interface Benefit { title: string; body: string; example?: Example }
 function BenefitCard({ item }: { item: Benefit }) {
   return (
     <div>
-      <h3 style={{ marginTop: 0, marginBottom: '0.75rem', fontSize: '1.1rem' }}>{item.title}</h3>
+      <h3 style={{ marginTop: 0, marginBottom: '0.75rem', fontSize: '1.1rem', fontFamily: 'var(--font-ui)' }}>{item.title}</h3>
       <p
         style={{ margin: item.example ? '0 0 1rem' : 0, fontSize: '0.95rem', lineHeight: 1.7, color: 'var(--hh-text-primary)' }}
         dangerouslySetInnerHTML={{ __html: mdInline(item.body) }}
