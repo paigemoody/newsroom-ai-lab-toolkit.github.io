@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Problem Briefs
 
-In this step you're going to expand a problem statement from the previous exercise into a **problem brief** - a document that gives you the details you need to start solving the problem.
+In this step you're going to expand a problem statement from the previous exercise into a **problem brief**: a document that gives you the details you need to start solving the problem.
 
 A problem brief expands on a **problem statement** by adding:
 

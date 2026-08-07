@@ -4,7 +4,7 @@ original:
   verb: needs
   need: a way to efficiently manage small advertising campaigns
   goal: staff can focus their time on larger revenue opportunities
-discussion: '"Manage" is doing too much work. We''d go back to the sales team to ask: is the time sink in prospecting, campaign setup, or ongoing maintenance after the sale?'
+discussion: '"Manage" is doing too much work. We''d go back to the sales team to ask: is the time sink in prospecting, campaign setup or ongoing maintenance after the sale?'
 improvements:
   - user: The sales team
     verb: needs

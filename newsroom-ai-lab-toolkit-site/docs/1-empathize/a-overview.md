@@ -13,7 +13,7 @@ By the end of this stage, you’ll have a set of real-life, specific experiences
 
 <ul>
 <li>**😣 Pain Points**: frictions felt or seen</li>
-<li>**🐢 Inefficiencies / Bottlenecks**: time sinks, brittle processes, or repetitive steps</li>
+<li>**🐢 Inefficiencies / Bottlenecks**: time sinks, brittle processes or repetitive steps</li>
 <li>**🧙 Aspirational Capabilities**: things your team and/or readers wish existed, or ideas you’d be excited to explore if there were no constraints</li>
 </ul>
 
@@ -22,6 +22,6 @@ By the end of this stage, you’ll have a set of real-life, specific experiences
 💡 Collecting a super broad mix of experiences helps your team **better understand your organization by discussing challenges and ideas aloud.**
 </p>
 <h4>
-🌟 Often things come up in this step that someone else on your team has already solved - a quick win just from saying experiences and needs aloud.
+🌟 Often things come up in this step that someone else on your team has already solved — a quick win just from saying experiences and needs aloud.
 </h4>
 

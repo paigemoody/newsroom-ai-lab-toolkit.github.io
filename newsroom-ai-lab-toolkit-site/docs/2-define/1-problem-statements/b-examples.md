@@ -19,7 +19,7 @@ Choose 3-5 experiences from your shared collection of observations and frame eac
 
 **Tips:**
 
-- As you go through the process you will find places where you need more information - that's good! It highlights where more user research is needed. Go back to the person who shared the original observation to get more clarity.
+- As you go through the process you will find places where you need more information — that's good! It highlights where more user research is needed. Go back to the person who shared the original observation to get more clarity.
 - Sometimes the user will be one person. Other times it will be a group. When it is a group, try to make it a specific one.
 
 ## Common pitfalls
@@ -27,9 +27,9 @@ Choose 3-5 experiences from your shared collection of observations and frame eac
 | Pitfall | How to spot it | Fix |
 | --- | --- | --- |
 | Solutionizing | The need names a tool or technology | Ask "why do you need that?" until you reach the gap |
-| Vanishing user | "The newsroom needs..." - too broad to act on | Make it specific enough to picture one person |
-| Mismatched user and goal | User is a reporter; goal is about revenue | Decide whose problem this is - write two statements if needed |
-| The non-goal | "So that things are more efficient" | Describe something observable - something you could check |
+| Vanishing user | "The newsroom needs..." — too broad to act on | Make it specific enough to picture one person |
+| Mismatched user and goal | User is a reporter; goal is about revenue | Decide whose problem this is — write two statements if needed |
+| The non-goal | "So that things are more efficient" | Describe something observable — something you could check |
 | Multi-problem problem | The need is a list of three different things | Write a separate statement for each, then prioritize |
 | One level too shallow | Solving the symptom, not the cause | Ask "why is that happening?" before writing the need |
 | The eternal goal | "So that journalism is more trusted" | Scope to something this specific problem could actually move |
@@ -57,7 +57,7 @@ The worksheet will ask for each piece of information separately, then automatica
 
 Once you have a rough observation or idea, our Problem Statement Coach can help you workshop it into a clear, structured statement.
 
-The coach will ask you questions about who is affected, what they actually need, and why it matters - and push back when something is too vague or bundles too many things together.
+The coach will ask you questions about who is affected, what they actually need and why it matters — and push back when something is too vague or bundles too many things together.
 
 **What to bring:**
 
@@ -65,6 +65,6 @@ The coach will ask you questions about who is affected, what they actually need,
 - Any context you have about who experiences it and why it matters
 - Openness to being asked "what do you mean by that?" more than once
 
-**What to expect:** The coach won't write your problem statement for you - it will help you think through each part of the format so the final statement reflects your actual understanding of the problem. If something feels vague, it will surface that rather than paper over it.
+**What to expect:** The coach won't write your problem statement for you — it will help you think through each part of the format so the final statement reflects your actual understanding of the problem. If something feels vague, it will surface that rather than paper over it.
 
 <TaskResources />

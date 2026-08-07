@@ -332,9 +332,9 @@ const STEP_CONTENTS: Array<() => React.ReactNode> = [
   () => (
     <div style={{ display:'flex', flexDirection:'column', gap:'0.625rem' }}>
       {[
-        { icon:'📥', label:'What inputs does this part need?',        hint:'Name the concrete inputs required - data, sources, context, approvals. Be specific: vague inputs produce vague outputs.' },
+        { icon:'📥', label:'What inputs does this part need?',        hint:'Name the concrete inputs required: data, sources, context, approvals. Be specific: vague inputs produce vague outputs.' },
         { icon:'✅', label:'What does good enough output look like?', hint:'Define quality before building. Can a human reliably evaluate the result and catch errors? What does "good enough" look like?' },
-        { icon:'⚙️', label:'What kind of solution fits?',              hint:'Could be AI, a rules-based tool, a process change, or keeping it fully human. Start with the problem, not the tool - and identify where humans must stay in the loop.' },
+        { icon:'⚙️', label:'What kind of solution fits?',              hint:'Could be AI, a rules-based tool, a process change, or keeping it fully human. Start with the problem, not the tool — and identify where humans must stay in the loop.' },
       ].map(({ icon, label, hint }, i, arr) => (
         <div key={label}>
           <div style={{ background:c.surface, border:`1px solid ${c.border}`, borderRadius:'0.75rem', padding:'1rem' }}>
@@ -413,7 +413,7 @@ const STEP_CONTENTS: Array<() => React.ReactNode> = [
       {[
         { icon:'🙋', label:'Who should you test with?',      hint:'Identify the stakeholders, users, or colleagues whose reaction matters most for this part. Aim for people who reflect real usage, not just internal allies.' },
         { icon:'👀', label:'What are you trying to learn?',  hint:'Define 1–3 specific questions before the session. Are you checking whether the output is accurate? Useful? Trusted? Understandable?' },
-        { icon:'📝', label:'How will you capture what you learn?', hint:'Take notes on what people actually do and say - not just what you hoped they would. Surprises and confusions are the most valuable signal.' },
+        { icon:'📝', label:'How will you capture what you learn?', hint:'Take notes on what people actually do and say — not just what you hoped they would. Surprises and confusions are the most valuable signal.' },
       ].map(({ icon, label, hint }, i, arr) => (
         <div key={label}>
           <div style={{ background:c.surface, border:`1px solid ${c.border}`, borderRadius:'0.75rem', padding:'1rem' }}>
@@ -578,7 +578,7 @@ export default function MethodologyBoard() {
 
           <div style={{ marginTop:'1.5rem' }}>
             {STEPS.map((s, i) => i !== idx ? null : (
-              <Block key={i} n={s.n} total={total} title={i === 9 && isLastStep10 ? 'All parts verified - the full solution is built.' : STEP_DETAILS[i].title} note={i === 9 && isLastStep10 ? undefined : STEP_DETAILS[i].summary} footer={i === 9 && isLastStep10 ? undefined : navFooter}>
+              <Block key={i} n={s.n} total={total} title={i === 9 && isLastStep10 ? 'All parts verified: the full solution is built.' : STEP_DETAILS[i].title} note={i === 9 && isLastStep10 ? undefined : STEP_DETAILS[i].summary} footer={i === 9 && isLastStep10 ? undefined : navFooter}>
                 {(() => {
                   const visual = i === 7 || i === 8 ? null
                     : i === 5 ? <Step6Content activePart={activePart} completed={completedParts} />

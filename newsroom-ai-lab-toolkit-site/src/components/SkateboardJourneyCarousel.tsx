@@ -10,19 +10,19 @@ const STEPS = [
       need: 'a faster way to get from the newsroom to the courthouse than walking',
       goal: 'they can be on scene to cover breaking stories the moment something important happens',
     },
-    feedback: "Walking works, but it takes too long - by the time we arrive, we've already missed the moment.",
+    feedback: "Walking works, but it takes too long — by the time we arrive, we've already missed the moment.",
   },
   {
     emoji: '🛹',
     label: 'Skateboard',
     body: 'A simple board with wheels that requires physical effort to move.',
-    feedback: "Faster than walking, but it's tiring to keep pushing and hard to balance - we need to arrive ready to report, not out of breath.",
+    feedback: "Faster than walking, but it's tiring to keep pushing and hard to balance — we need to arrive ready to report, not out of breath.",
   },
   {
     emoji: '🛴',
     label: 'Scooter',
     body: 'A two-wheeled vehicle with a platform for standing and handlebars for steering.',
-    feedback: "Easier to steer and balance, but we still get tired pushing - and it's too slow when a story breaks without warning.",
+    feedback: "Easier to steer and balance, but we still get tired pushing — and it's too slow when a story breaks without warning.",
   },
   {
     emoji: '🚲',
@@ -40,12 +40,12 @@ const STEPS = [
     emoji: '🚙',
     label: 'Car',
     body: 'A four-wheeled vehicle with an engine and motor for propulsion.',
-    feedback: "This covers weather protection and cargo space for gear - but we need to move fast enough to beat other outlets to the scene.",
+    feedback: "This covers weather protection and cargo space for gear — but we need to move fast enough to beat other outlets to the scene.",
   },
   {
     emoji: '🏎️',
     label: 'Race car',
-    body: "Gets reporters from the newsroom to the courthouse fast, comfortably, and reliably enough to be there the moment something important happens - engines, suspension, and aerodynamics tuned for peak performance, built on everything learned through every round of feedback along the way.",
+    body: "Gets reporters from the newsroom to the courthouse fast, comfortably, and reliably enough to be there the moment something important happens: engines, suspension, and aerodynamics tuned for peak performance, built on everything learned through every round of feedback along the way.",
   },
 ];
 

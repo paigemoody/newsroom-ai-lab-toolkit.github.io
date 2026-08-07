@@ -8,7 +8,7 @@ import ObservationExamples from '@site/src/components/ObservationExamples';
 
 ## Exercise options
 
-You can capture experiences however works for your team - sticky notes, a shared doc, voice memos. That said, we find it helpful to get everything into one place early. Our template below is designed for this step and makes it easier to spot patterns when you move into defining the problem.
+You can capture experiences however works for your team: sticky notes, a shared doc, voice memos. That said, we find it helpful to get everything into one place early. Our template below is designed for this step and makes it easier to spot patterns when you move into defining the problem.
 
 ### Use Collection Template
 
@@ -28,8 +28,8 @@ You can capture experiences however works for your team - sticky notes, a shared
 <ObservationExamples />
 
 :::tip[Tips]
-- **Be specific** - include who’s involved, where/when it happens, and what the impact is.
-- **Include both problems and opportunities** - frustrations, slowdowns, but also exciting "what if" ideas.
+- **Be specific**: include who’s involved, where/when it happens and what the impact is.
+- **Include both problems and opportunities**: frustrations, slowdowns, but also exciting "what if" ideas.
 - If someone gets stuck, encourage them to **reflect on their previous week of work**:
     - When did they get frustrated? What were they trying to do? What got in the way?
     - Where did they wish they had a magic wand to make something seemingly impossible, possible?
