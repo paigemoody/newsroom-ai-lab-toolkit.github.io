@@ -9,16 +9,16 @@ improvements:
   - user: The sales team
     verb: needs
     need: a more efficient way to prospect and qualify small advertising clients
-    goal: they can focus their time on larger revenue opportunities
+    goal: the team can take on more small campaigns without adding headcount
     note: Focuses on the front of the funnel
   - user: The sales team
     verb: needs
     need: a faster way to set up small advertising campaigns
-    goal: they can focus their time on larger revenue opportunities
+    goal: the team can take on more small campaigns without adding headcount
     note: Focuses on campaign setup
   - user: The sales team
     verb: needs
     need: a less manual way to support small advertising accounts after launch
-    goal: they can focus their time on larger revenue opportunities
+    goal: the team can take on more small campaigns without adding headcount
     note: Focuses on post-sale maintenance
 ---

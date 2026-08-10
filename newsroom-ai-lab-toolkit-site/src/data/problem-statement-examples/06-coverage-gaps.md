@@ -15,7 +15,7 @@ improvements:
   - user: Beat reporters and assigning editors
     need: to identify missing perspectives in ongoing coverage
     goal: stories better represent the people affected by the issues
-  - user: Audience and newsroom editors
-    need: to see where coverage is not matching community information needs
-    goal: they can prioritize reporting that is more relevant and useful
+  - user: Audience editors
+    need: a way to identify coverage gaps against community information needs
+    goal: they can flag those gaps to the reporters and editors who decide what gets covered
 ---
