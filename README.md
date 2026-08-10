@@ -54,7 +54,7 @@ npm run test:visual:update
 
 `src/pages/qa-code-sample.md` is a fixture page (lives outside `docs/`, so it has no sidebar association and never appears in navigation or search) that exists solely so the suite has real Prism code blocks to test against.
 
-CI runs this suite on every pull request via `.github/workflows/visual-tests.yml`.
+CI runs this suite on pull requests that change files under `newsroom-ai-lab-toolkit-site/` via `.github/workflows/visual-tests.yml`.
 
 Three projects are configured in `playwright.config.ts`: `light-desktop`, `dark-desktop` (forces `prefers-color-scheme: dark`, which Docusaurus's color-mode provider follows on a fresh page load), and `mobile-light` (Pixel 5 viewport). Every spec in `tests/visual/` runs under all three automatically — no per-spec setup needed.
 
