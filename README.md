@@ -66,7 +66,7 @@ Three projects are configured in `playwright.config.ts`: `light-desktop`, `dark-
 npm run test:a11y
 ```
 
-A failure prints the violation's WCAG rule, the offending element, and why it failed — there's no baseline image to regenerate here, just a real issue to fix.
+A failure prints a summary of each serious/critical violation (impact, rule id, description, and node count) — there's no baseline image to regenerate here, just a real issue to fix.
 
 ### Adding a visual spec
 
