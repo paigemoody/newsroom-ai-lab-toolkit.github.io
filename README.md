@@ -56,7 +56,17 @@ npm run test:visual:update
 
 CI runs this suite on every pull request via `.github/workflows/visual-tests.yml`.
 
-Only a light-mode desktop project (`light-desktop`) is configured in `playwright.config.ts` currently.
+Three projects are configured in `playwright.config.ts`: `light-desktop`, `dark-desktop` (forces `prefers-color-scheme: dark`, which Docusaurus's color-mode provider follows on a fresh page load), and `mobile-light` (Pixel 5 viewport). Every spec in `tests/visual/` runs under all three automatically — no per-spec setup needed.
+
+### Accessibility (axe)
+
+`newsroom-ai-lab-toolkit-site/tests/a11y/` runs [`@axe-core/playwright`](https://github.com/dequelabs/axe-core-npm/tree/develop/packages/playwright) against the same page set as `tests/visual/`, across all three projects above. Only **serious/critical** impact violations fail the test — axe's moderate/minor findings involve enough judgment calls (redundant alt text, landmark regions, etc.) that gating on them would make this a noisy check rather than a meaningful one.
+
+```bash
+npm run test:a11y
+```
+
+A failure prints the violation's WCAG rule, the offending element, and why it failed — there's no baseline image to regenerate here, just a real issue to fix.
 
 ### Adding a visual spec
 

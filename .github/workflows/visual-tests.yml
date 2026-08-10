@@ -1,4 +1,4 @@
-name: Visual Regression Tests
+name: Visual Regression + Accessibility Tests
 
 on:
   pull_request:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   playwright:
-    name: Playwright visual regression
+    name: Playwright visual regression + axe a11y scan
     runs-on: ubuntu-latest
     # Run inside the same image the project's devcontainer uses (see
     # .devcontainer/devcontainer.json) so screenshots are rendered with the same OS,
@@ -32,9 +32,11 @@ jobs:
         working-directory: newsroom-ai-lab-toolkit-site
         run: npx playwright install --with-deps chromium
 
-      - name: Run visual regression tests
+      - name: Run visual regression + accessibility tests
         working-directory: newsroom-ai-lab-toolkit-site
-        run: npx playwright test tests/visual
+        # No path restriction - runs tests/visual (light-desktop, dark-desktop,
+        # mobile-light projects) and tests/a11y (axe-core, serious/critical only) together.
+        run: npx playwright test
 
       - name: Upload Playwright report
         if: ${{ !cancelled() }}
