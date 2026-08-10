@@ -17,6 +17,10 @@ improvements:
     note: Isolates one specific, observable need
   - user: Student reporters
     need: to spot missing perspectives in their drafts before human review
-    goal: they can produce more complete reporting and shorten edit cycles
+    goal: they can produce more complete reporting
     note: '"More complete reporting" is a clearer outcome'
+  - user: Student reporters
+    need: to spot missed opportunities for visuals before human review
+    goal: they can submit drafts that don't need a follow-up pass to add visuals
+    note: Completes the third thread from the bundled original need
 ---
